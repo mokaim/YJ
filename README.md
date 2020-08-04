@@ -19,7 +19,7 @@ YJ First Project
 1. 프로젝트 가져오기
 
 
-
+     - git bash 설치 https://git-scm.com/book/ko/v2/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-Git-%EC%84%A4%EC%B9%98
      - git clone https://github.com/mokaim/YJ.git (clone 으로 가져온 프로젝트는 자신의 Local Repository 가 된다.)
      - 이클립스에서 import -> Existing Maven Project 클릭한 후 GitHub 원격 리파지토리에서 가져온 프로젝트 폴더를 클릭한 후 폴더열기 클릭
      - Next 누른 후 성공적으로 Import 시킴 

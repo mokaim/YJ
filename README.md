@@ -1,5 +1,7 @@
 
-YJ First Project
+# YJ First Project
+## 주제 : RESTful 기반의 자유게시판
+
 
 프론트 : HTML, CSS, JAVA SCRIPT, BOOTSTRAP 4
          JQUERY, Ajax
@@ -12,7 +14,7 @@ YJ First Project
 
 공동 프로젝트 버젼관리 : Git , GitHub
 
-주제 : RESTful 기반의 자유게시판
+
 
 
 

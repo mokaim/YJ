@@ -1,0 +1,65 @@
+/* ====Global classes==== */
+
+@import url(./variables.css);
+
+/* text */
+.title-text{
+    font: normal bold 40px/72px var(--crimsonText);
+    text-transform: uppercase;
+    color: var(--title-color);
+}
+
+/* buttons */
+.button{
+    position: relative;
+    color: var(--primary-color);
+    font-weight: 550;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .7rem 1.2rem;
+    margin: 1rem;
+    z-index: 1;
+}
+
+.button::before{
+    content: ' ';
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px; 
+    background: var(--title-color);
+    border: var(--primary-color) solid 3px;
+    z-index: -1;
+
+}
+
+.button::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    background: #fff;
+    transform: rotate(0);
+    transition: transform .2s;
+    z-index: -2;
+
+}
+
+.button:hover::after{
+    transform: rotate(-4deg) translate(1%, -5%);
+}
+
+
+/* paragraph */
+p.para{
+    color: var(--text-color);
+    font: bold 500 30px/20px var(--crimsonText);
+}
+
+/* font */
+.font-crimsonText{
+    font-family: var(--crimsonText);
+}

@@ -1,7 +1,5 @@
 /* ====Global classes==== */
 
-@import url(./variables.css);
-
 /* text */
 .title-text{
     font: normal bold 40px/72px var(--crimsonText);

@@ -1,23 +1,26 @@
-package test;
+package com.yeongjin.controller;
 
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Test
+ * Servlet implementation class MainController
  */
-public class Test extends HttpServlet {
+
+@WebServlet("/test")
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test() {
+    public MainController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +30,7 @@ public class Test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/test.jsp");
+		RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/index.jsp");
 		rs.forward(request, response);
 	}
 

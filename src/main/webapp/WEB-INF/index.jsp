@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +9,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Team Project Board</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fonts.css">
+        
         <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
      
     </head>
@@ -49,7 +58,7 @@
             <!--============== Start side bar ============== -->
             <div class="sidebar" id="mySidebar">
                 <div class="sidebar-menu">
-                    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">×</a>
+                    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">Ã</a>
                     <div class="profile">
                         <img src="./image/person.jpg" alt="">
                         <p>USER</p>
@@ -126,7 +135,7 @@
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td class="tbl-title">hi hello bye byebyebyebyebyebyebyebyebyebyebye</td>
+                        <td class="tbl-title">안녕 ㅋㅋㅋㅋ</td>
                         <td class="tbl-title">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>

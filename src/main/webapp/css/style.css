@@ -1,11 +1,4 @@
 /* @import fonts  */
-@import url(/css/fonts.css);
-
-/* css variables */
-@import url(/css/variables.css);
-
-/* css global styling*/
-@import url(/css/global.css);
 
 *{
     margin: 0;

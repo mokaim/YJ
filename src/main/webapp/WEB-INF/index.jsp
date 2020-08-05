@@ -9,11 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Team Project Board</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fonts.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/variables.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/global.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css">
         
         <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
      
@@ -58,7 +58,7 @@
             <!--============== Start side bar ============== -->
             <div class="sidebar" id="mySidebar">
                 <div class="sidebar-menu">
-                    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">Ã</a>
+                    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">메뉴</a>
                     <div class="profile">
                         <img src="./image/person.jpg" alt="">
                         <p>USER</p>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-test view
 
-종욱씨
+${test}
 </body>
 </html>

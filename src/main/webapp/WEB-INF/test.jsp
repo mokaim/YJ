@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-test view
-
-종욱씨
+<form action="posttest" method="post">
+<input name="test1" type="text">
+<input name="test2" type="text">
+<button type="submit">submit</button>
+</form>
 </body>
 </html>

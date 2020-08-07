@@ -6,23 +6,28 @@
         <title>Team Project Board</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
         <link rel="stylesheet" href="./css/style.css">
-        <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
-     
-    </head>
+        <link rel="stylesheet" href="./css/fonts.css">
+        <link rel="stylesheet" href="./css/global.css">
+        <link rel="stylesheet" href="./css/variables.css">
+        <link rel="stylesheet" href="./css/responsive.css">
         
+        
+
+    </head>
+
         <!--===============Start wrapper ================-->
         <div class="wrapper">
             <!--==============Start header menu============== -->
             <div class="header">
                 <div class="header-menu">
-                    <div class="title-text">Awesome People</div>
+                    <div class="title-text"><a href="#">Awesome People</a></div>
                     <div class="openbtn" onclick="toggleSidebar()">
                         <i class="fas fa-th-list"></i>
                     </div>
                     <ul>
                         <li><a class="button" style="width:auto;" onclick="openLogin()">Log In</a></li>
                             <div id="id01" class="login">
-                                <form action="/action_page.php" method="post" class="login-content animate">
+                                <form action="#" method="post" class="login-content animate">
                                     <div class="imgcontainer">
                                         <span><a class="close" onclick="closeLogin()">x</a></span>
                                         <img src="/image/person.jpg" alt="Avatar" class="avatar" ></img>
@@ -34,13 +39,34 @@
                                         <input type="password" placeholder="Enter Password" name="psw" required></input>
                                         <button class="loginbtn" type="submit">Login</button>
                                         <label>
-                                            <input type="checkbox" checked="checked" name="remember">Remember me</input>
+                                            <input type="checkbox" checked="checked" name="remember"> Remember me</input>
                                         </label>
                                         <span class="psw">Forgot <a href="#" class="forgotPsw">password? <i class="fas fa-key"></i></a></span>
                                     </div>
                                 </form>
                             </div>
-                        <li><a href="#" class="button">Sign Up</a></li>
+                        <li><a href="#" class="button" style="width:auto;" onclick="openSignup()">Sign Up</a></li>
+                            <div id="signup" class="signup">
+                                <form action="#" method="post" class="signup-content animate">
+                                    <div class="welcomecontainer">
+                                        <span><a class="close" onclick="closeSignup()">x</a></span>
+                                        <div>Be one of our <p class="">Awesome People!</p></div>
+                                    </div>
+                                    <div class="container">
+                                        <label for="email"><b>Email</b></label>
+                                        <input type="text" placeholder="Enter Email" name="email" required></input>
+                                        <label for="psw"><b>Password</b></label>
+                                        <input type="password" placeholder="Enter Password" name="psw" required></input>
+                                        <label for="repeatPsw"><b>Repeat Password</b></label>
+                                        <input type="password" placeholder="Enter Password" name="repeatPsw" required></input>
+                                        <button class="signUpBtn" type="submit">Sign Up</button>
+                                        <p>or</p>
+                                        <button class="signUpBtn signUpWith" type="submit"><i class="fab fa-google"></i> Sign Up with Google</button>
+                                        <button class="signUpBtn signUpWith" type="submit"><i class="fab fa-facebook-f"></i> Sign Up with Facebook</button>
+                                        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+                                    </div>
+                                </form>
+                            </div>
                         <li><a href="#" class="dark-mode"><i class="fas fa-moon"></i></a></li>
                     </ul>
                 </div>
@@ -101,19 +127,21 @@
             <!--===============Start main container ================-->
             <div class="main-container" id="myMain">
                 <div class="main-top">
-                    <button class="mainTop-btn">All</button>
-                    <button class="mainTop-btn">Notice</button>
-                    <div class="search">
-                        <input type="text" class="searchTerm" placeholder="Search here!:)">
-                        <button type="submit" class="searchButton">
-                          <i class="fa fa-search"></i>
-                       </button>
-                     </div>
-
-                    <button class="mainTop-btn">Write</button>
+                    <div class="main-top2">
+                        <button class="mainTop-btn">All</button>
+                        <button class="mainTop-btn">Notice</button>
+                    </div>
+                    <div class="main-top2">
+                        <div class="search">
+                            <input type="text" class="searchTerm" placeholder="Search here!:)">
+                            <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i></button>
+                        </div>
+                        <button class="mainTop-btn">Write</button>
+                    </div>
                 </div>
-                <table class="table table-light">
-                    <thead class="thead-light">
+                <table>
+                    <thead>
                       <tr>
                         <th scope="col" class="col-no">No</th>
                         <th scope="col" class="col-title">Title</th>
@@ -127,7 +155,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello bye byebyebyebyebyebyebyebyebyebyebye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -135,7 +163,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello byebyebyebyebyebyebyebyebye bye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -143,7 +171,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello bye byebyebyebyebyebyebyebyebyebyebyebyebyebye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -151,7 +179,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello byebyebyebyebyebyebyebyebyebyebye bye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -159,7 +187,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello bye byebyebyebyebyebyebyebyebyebyebyebyebye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -167,7 +195,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello byebyebyebyebyebyebyebyebyebyebyebye bye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -175,7 +203,7 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello bye bye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
@@ -183,13 +211,24 @@
                       <tr>
                         <th scope="row">1</th>
                         <td class="tbl-title">hi hello bye bye</td>
-                        <td class="tbl-title">writer</td>
+                        <td class="tbl-writer">writer</td>
                         <td>2020-08-04</td>
                         <td>50</td>
                         <td>5</td>
                       </tr>
                     </tbody>
                   </table>
+
+                  <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#" class="activePage">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">&raquo;</a>
+                  </div>
             </div>
 
 
@@ -208,15 +247,17 @@
             }
 
             var logIn = document.getElementById('id01');
+            var signUp = document.getElementById('signup');
 
-            window.onclick = function(e) {
-                    if (e.target == login){
-                        e.style.display = "none";
-                    }
-                }
+            // window.onclick = function(e) {
+            //         if (e.target != login){
+            //             e.style.display = "none";
+            //         }
+            //     }
 
             function openLogin(){
                 logIn.style.display = 'block';
+                
             }
 
             function closeLogin(){
@@ -224,11 +265,25 @@
                 logIn.style.display = 'none';
             }
 
-        //   onclick = "document.getElementById('id01').style.display='none'"
-           
+            function openSignup(){
+                signUp.style.display = 'block';
+            }
+
+            function closeSignup(){
+                var signUp = document.getElementById('signup');
+                signUp.style.display = 'none';
+            }
+
+            // function activePage(){
+            //     var page = document.getElementById('page');
+            //     element.classList.add('activePage');
+            // }
+
+        
 
 
-            
+
+
         </script>
     </body>
 </html>

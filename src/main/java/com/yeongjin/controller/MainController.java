@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 
-@WebServlet("/test")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,11 +31,10 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		request.setAttribute("test", "¸¶ ¾È³çÇÏ½Å°¡!!!!");
-		System.out.println("µµÂø!");
-		request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
-		
 
+		request.getRequestDispatcher("WEB-INF/list.jsp").forward(request, response);
+		
+		
 		
 	
 	}

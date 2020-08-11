@@ -2,6 +2,7 @@ package com.yeongjin.filter;
 
 import java.io.IOException;
 
+
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -10,9 +11,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.dsig.spec.XPathType.Filter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RequestFilters implements javax.servlet.Filter{
+	
+	
+	private Logger log = LoggerFactory.getLogger(RequestFilters.class);
 
 	
 	String encoding;
@@ -42,27 +48,34 @@ public class RequestFilters implements javax.servlet.Filter{
 		
 		String path = req.getRequestURI().substring(req.getContextPath().length());
 
-		System.out.println(path);
+		log.info("Filter start!!");
 		
 		if(session.getAttribute("loginValidate") == null) {
 			
-			System.out.println("∑Œ±◊¿Œ¿∏∑Œ Ω««‡ §°§°");
-			req.getRequestDispatcher("/login").forward(req, res);
+			log.info("No Session");
+			//req.getRequestDispatcher("/login").forward(req, res);
 			
 			
-		}else {
 			
-			if (path.startsWith("/resources")) {
-				System.out.println("hello");
-			    filter.doFilter(request, response); // Goes to container's own default servlet.
+		}//else {
+			
+			if (path.startsWith("/resources/")) {
+				log.info("request resources : " + "@" + path + "@");
+			    filter.doFilter(req, res); // Goes to container's own default servlet.
 			    
+			} else if(path.startsWith("/")) {
+				log.info("/listÎ°ú Ïù¥Îèô!!!");
+				req.getRequestDispatcher("WEB-INF/test.jsp").forward(req, res);
 			} else {
-				System.out.println("NOt");
-			    request.getRequestDispatcher(path).forward(request, response); // Goes to controller servlet.
+				
+
+				
+				log.info("Go to other filter!! : " + "@" + path + "@");
+			    req.getRequestDispatcher(path).forward(req, res); // Goes to controller servlet.
 			    
 			}
 			
-		}
+		//}
 		
 		
 	}

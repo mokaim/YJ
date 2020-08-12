@@ -8,7 +8,16 @@ import java.sql.SQLException;
 
 public class JDBCUtil {
 	
-	public static Connection getConnection() {
+	private JDBCUtil() {}
+	private static JDBCUtil instance = null;
+	
+	public static JDBCUtil getInstance() {
+		if(instance == null)
+			instance = new JDBCUtil();
+		return instance;
+	}
+
+	public Connection getConnection() {		
 		Connection conn = null;
 		try {
 			String jdbcDriver = "jdbc:sqlserver://localhost:10161;databaseName=YJ;";
@@ -24,7 +33,7 @@ public class JDBCUtil {
 	}
 	
 	// Close
-	public static void ConnClose(Connection conn) {
+	public void ConnClose(Connection conn) {
 		try {
 			conn.close();
 		}catch(Exception e) {
@@ -33,7 +42,7 @@ public class JDBCUtil {
 		}
 	}
 	
-	public static void rsClose(ResultSet rs) {
+	public void rsClose(ResultSet rs) {
 		try {
 			rs.close();
 		}catch(Exception e) {
@@ -42,7 +51,7 @@ public class JDBCUtil {
 		}
 	}
 	
-	public static void pstmtClose(PreparedStatement pstmt) {
+	public void pstmtClose(PreparedStatement pstmt) {
 		try {
 			pstmt.close();
 		}catch(Exception e) {
@@ -51,7 +60,7 @@ public class JDBCUtil {
 		}
 	}
 	//DCL
-	public static void commit(Connection conn) {
+	public void commit(Connection conn) {
 		try {
 			conn.commit();
 		}catch(Exception e) {
@@ -59,14 +68,12 @@ public class JDBCUtil {
 			System.out.println("Commit Error");
 		}
 	}
-	public static void Rollback(Connection conn) {
+	public void Rollback(Connection conn) {
 		try {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Rollback Error");
 		}
-	}
-	
-	
+	}	
 }

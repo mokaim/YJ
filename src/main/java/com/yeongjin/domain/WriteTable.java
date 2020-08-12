@@ -1,7 +1,6 @@
 package com.yeongjin.domain;
 
 public class WriteTable {
-	private int Number;
 	private String NName;
 	private String Header;
 	private String Content;
@@ -17,18 +16,10 @@ public class WriteTable {
 		Hate = 0;
 		Visit = 0;
 	}
-	// Getter Setter
 	
+	// Getter Setter
 	public String getNName() {
 		return NName;
-	}
-
-	public int getNumber() {
-		return Number;
-	}
-
-	public void setNumber(int number) {
-		Number = number;
 	}
 
 	public void setNName(String nName) {

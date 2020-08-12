@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import com.yeongjin.domain.WriteTable;
 
-
 public class WriteTableDAO {
+	// DAO Singleton
 	private WriteTableDAO() {}
 	private static WriteTableDAO instance = null;
 	
@@ -18,11 +18,13 @@ public class WriteTableDAO {
 		
 		return instance;
 	}
-	SingletonClass singleton = SingletonClass.getInstance();
-	Connection conn = JDBCUtil.getConnection();
 	
-	public void insertWriteTable(WriteTable writeTable) {
-		singleton.writeInsertCnt = 0;
+	public Connection conn;
+	
+	// 글쓰기
+	public synchronized int insertWriteTable(WriteTable writeTable) {
+		int Cnt = 0;
+		conn = JDBCUtil.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "insert into WriteTable values (?,?,?,?,?,?)";
 		try {
@@ -34,23 +36,25 @@ public class WriteTableDAO {
 			pstmt.setInt(5, writeTable.getHate());
 			pstmt.setInt(6, writeTable.getVisit());
 			
-			singleton.writeInsertCnt = pstmt.executeUpdate();
+			Cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("insertWriteTable Error");
 		}
 		finally {
 			try {
-				pstmt.close();
+				JDBCUtil.getInstance().pstmtClose(pstmt);
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("pstmtClose Error");
 			}
 		}
+		return Cnt;
 	}
-	
-	public void deleteWriteTable(WriteTable writeTable) {
-		singleton.writeDeleteCnt = 0;
+	// 해당 글 삭제
+	public synchronized int deleteWriteTable(WriteTable writeTable) {
+		int Cnt = 0;
+		conn = JDBCUtil.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "delete from WriteTable where nname = ? and header = ?";
 		try {
@@ -58,23 +62,25 @@ public class WriteTableDAO {
 			pstmt.setString(1, writeTable.getNName());
 			pstmt.setString(2, writeTable.getHeader());
 			
-			singleton.writeDeleteCnt = pstmt.executeUpdate();
+			Cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("deleteWriteTable Error");
 		}
 		finally {
 			try {
-				pstmt.close();
+				JDBCUtil.getInstance().pstmtClose(pstmt);
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("pstmt Close Error");
 			}
 		}
+		return Cnt;
 	}
-	
-	public void updateLikes(WriteTable writeTable) {
-		singleton.writeUpdateCnt = 0;
+	// 좋아요 증가
+	public synchronized int updateLikes(WriteTable writeTable) {
+		int Cnt = 0;
+		conn = JDBCUtil.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "update WriteTable set likes +=1 where nname = ? and header = ?";
 		try {
@@ -82,21 +88,24 @@ public class WriteTableDAO {
 			pstmt.setString(1, writeTable.getNName());
 			pstmt.setString(2, writeTable.getHeader());
 			
-			singleton.writeUpdateCnt = pstmt.executeUpdate();
+			Cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("updateLikes Error");
 		}
 		finally {
 			try {
-				pstmt.close();
+				JDBCUtil.getInstance().pstmtClose(pstmt);
 			}catch(Exception e) {
 				System.out.println("pstmtClose Error");
 			}
 		}
+		return Cnt;
 	}
-	public void updateHates(WriteTable writeTable) {
-		singleton.writeUpdateCnt = 0;
+	// 싫어요 증가
+	public synchronized int updateHates(WriteTable writeTable) {
+		int Cnt = 0;
+		conn = JDBCUtil.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "update WriteTable set hates +=1 where nname = ? and header = ?";
 		try {
@@ -104,21 +113,24 @@ public class WriteTableDAO {
 			pstmt.setString(1, writeTable.getNName());
 			pstmt.setString(2, writeTable.getHeader());
 			
-			singleton.writeUpdateCnt = pstmt.executeUpdate();
+			Cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("updateHates Error");
 		}
 		finally {
 			try {
-				pstmt.close();
+				JDBCUtil.getInstance().pstmtClose(pstmt);
 			}catch(Exception e) {
 				System.out.println("pstmtClose Error");
 			}
 		}
+		return Cnt;
 	}
-	public void updateVisit(WriteTable writeTable) {
-		singleton.writeUpdateCnt = 0;
+	// 해당 글 방문횟수 증가
+	public synchronized int updateVisit(WriteTable writeTable) {
+		int Cnt = 0;
+		conn = JDBCUtil.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "update WriteTable set visit +=1 where nname = ? and header = ?";
 		try {
@@ -126,18 +138,19 @@ public class WriteTableDAO {
 			pstmt.setString(1, writeTable.getNName());
 			pstmt.setString(2, writeTable.getHeader());
 			
-			singleton.writeUpdateCnt = pstmt.executeUpdate();
+			Cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("updateVisit Error");
 		}
 		finally {
 			try {
-				pstmt.close();
+				JDBCUtil.getInstance().pstmtClose(pstmt);
 			}catch(Exception e) {
 				System.out.println("pstmtClose Error");
 			}
 		}
+		return Cnt;
 	}
 	
 }

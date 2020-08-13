@@ -32,7 +32,7 @@ public class MainController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 
-		request.getRequestDispatcher("WEB-INF/list.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
 		
 		
 		

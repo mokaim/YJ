@@ -64,8 +64,8 @@ public class RequestFilters implements javax.servlet.Filter{
 			    filter.doFilter(req, res); // Goes to container's own default servlet.
 			    
 			} else if(path.startsWith("/")) {
-				log.info("/list로 이동!!!");
-				req.getRequestDispatcher("WEB-INF/test.jsp").forward(req, res);
+				log.info("/list濡� �씠�룞!!!");
+				req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, res);
 			} else {
 				
 

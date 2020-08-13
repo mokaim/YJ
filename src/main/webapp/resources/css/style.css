@@ -1,4 +1,5 @@
 
+
 *{
     margin: 0;
     padding: 0;
@@ -46,11 +47,11 @@ html.body{
     padding: 0, 20rem;
 }
 
-/* .wrapper .header .header-menu a{
+.wrapper .header .header-menu a{
     text-decoration: none;
-} */
+}
 
-.wrapper .header .header-menu .title-text{
+.wrapper .header .header-menu .header-text{
     position: absolute;
     margin-left: 2rem;
 }
@@ -73,10 +74,10 @@ html.body{
     display: block;
 }
 
-.login, .signup{
+.login, .signup, .upload, .write{
     display: none;
     position: fixed;
-    z-index: 3;
+    z-index: 4;
     left: 0%;
     top: 0%;
     width: 100%;
@@ -87,18 +88,105 @@ html.body{
 }
 
  .login .login-content,
- .signup .signup-content{
+ .signup .signup-content,
+ .upload .upload-content,
+ .write .write-content {
     background-color: whitesmoke;
-    margin: 10% auto;
+    margin:100px auto;
     border: 1px solid var(--primary-color2);
     width: 40%;
 }
 
+.write .write-content{
+    width: 60%;
+}
+
 .login .login-content .imgcontainer,
-.signup .signup-content .welcomecontainer {
-  text-align: center;
-  margin: 8% 0 8% 0;
-  position: relative;
+.signup .signup-content .welcomecontainer,
+.upload .upload-content .uploadContainer,
+.write .write-content .writeContainer{
+    text-align: center;
+    margin: 8% 0;
+    position: relative;
+}
+
+
+
+.write .write-content .writeContainer{
+    margin: 0;
+}
+
+.upload .upload-content .uploadContainer{
+    position: relative;
+    height: 300px;
+    width: 80%;
+    border-radius: 10px;
+    background: whitesmoke;
+    border: 2px dashed #c2cdda;
+    margin: 10% auto;
+}
+
+.upload .upload-content .uploadContainer .imgcontainer{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload .upload-content .uploadContainer .imgcontainer img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+.upload .upload-content .uploadContainer .content{
+    margin-top: 50px;
+}
+
+.upload .upload-content .uploadContainer .content .icon{
+    font-size: 100px;
+    color: var(--primary-color2);
+  }
+
+.upload .upload-content .uploadContainer .content .text{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary-color2);
+}
+
+.upload .upload-content .uploadContainer .uploadClose{
+    position: absolute;
+    right: 15px;
+    top: 0;
+    color: var(--primary-color);
+    font-size: 35px;
+    font-weight: bold;
+    display: none;
+}
+
+.upload .upload-content .uploadContainer.active{
+    border: none;
+}
+
+.upload .upload-content .uploadContainer.active:hover .uploadClose{
+    display: block;
+}
+
+.upload .upload-content .uploadContainer .file-name{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 18px;
+    color: whitesmoke;
+    display: none;
+    background: var(--primary-color);
+  }
+
+.upload .upload-content .uploadContainer.active:hover .file-name{
+    display: block;
 }
 
 .signup .signup-content .welcomecontainer{
@@ -110,11 +198,30 @@ html.body{
   border-radius: 50%;
 }
 
+.write .write-content .writeContainer img{
+    width: 100%;
+    opacity: .8;
+    z-index: -1;
+}
+
 .signup .signup-content .welcomecontainer div{
     justify-content: center;
     font: bold 1.5rem/55px var(--crimsonText);
     color: var(--primary-color2);
     padding: 15px;
+    text-transform: uppercase;
+}
+
+.write .write-content .writeContainer p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font: bold 2rem/5rem var(--crimsonText);
+    color: var(--title-color);
+    padding: 15px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px var(--primary-color), -2px -2px 0px  var(--primary-color), 2px -2px 0px  var(--primary-color), -2px 2px 0px  var(--primary-color);
 }
 
 .signup .signup-content .welcomecontainer p{
@@ -124,29 +231,59 @@ html.body{
 }
 
 .login .login-content .imgcontainer .close,
-.signup .signup-content .welcomecontainer .close {
+.signup .signup-content .welcomecontainer .close,
+.upload .upload-content .uploadContainer span .close,
+.write .write-content .writeContainer .close {
   position: absolute;
   right: 10%;
   top: 0%;
   color: var(--primary-color);
   font-size: 35px;
   font-weight: bold;
+  z-index: 1;
+}
+
+.upload .upload-content span .close {
+    display: block !important;
+    position: relative !important;
+    text-decoration: none !important;
+    font-size: 35px !important;
+    padding: 0 20px 0 0 !important;
+    margin: 0px !important;
+    border: none !important;
+    transition: 0 !important;
+    float: right !important;
+    padding-right: 10px !important;
+    color: var(--primary-color) !important;
+    font-weight: bold;
+    z-index: 1;
 }
 
 .login .login-content .imgcontainer .close:hover,
 .login .login-content .imgcontainer .close:focus,
 .signup .signup-content .welcomecontainer .close:hover,
-.signup .signup-content .welcomecontainer .close:focus{
-  color: red;
+.signup .signup-content .welcomecontainer .close:focus,
+.upload .upload-content span .close:hover,
+.upload .upload-content span .close:focus,
+.upload .upload-content .uploadContainer .close:hover,
+.upload .upload-content .uploadContainer .close:focus,
+.write .write-content .writeContainer .close:hover,
+.write .write-content .writeContainer .close:focus{
+  color: red !important;
   cursor: pointer;
 }
 
 
+
+
 .login .login-content .container,
-.signup .signup-content .container{
+.signup .signup-content .container,
+.write .write-content .container{
   padding: 16px;
   margin: 30px;
 }
+
+
 
 .signup .signup-content .container{
     margin-top: 0px !important;
@@ -158,7 +295,8 @@ html.body{
 
 
 .login .login-content input[type=text], input[type=password],
-.signup .signup-content input[type=text], input[type=password]{
+.signup .signup-content .container .form-control input[type=text], input[type=password],
+.write .write-content .container input[type=text]{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -167,8 +305,71 @@ html.body{
   box-sizing: border-box;
 }
 
+.login .login-content input,
+.signup .signup-content .container .form-control input,
+.write .write-content .container input{
+    border-radius: 4px;
+}
+
+.signup .signup-content .container .success input{
+    border-color: #2ecc71 !important;
+}
+
+.signup .signup-content .container .error input{
+    border-color: #e74c3c !important;
+}
+
+.signup .signup-content .container .form-control{
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+.signup .signup-content .container .form-control i{
+	visibility: hidden;
+	position: absolute;
+	top: 40px;
+	right: 10px;
+}
+
+.signup .signup-content .container .error i.fa-exclamation-circle {
+	color: #e74c3c;
+	visibility: visible;
+}
+
+.signup .signup-content .container .success i.fa-check-circle {
+	color: #2ecc71;
+	visibility: visible;
+}
+
+.signup .signup-content .container .form-control small {
+	color: #e74c3c;
+	position: absolute;
+	bottom: 0;
+    left: 0;
+    top: 75px;
+	visibility: hidden;
+}
+
+.signup .signup-content .container .error small {
+	visibility: visible;
+}
+
+.write .write-content .container .content{
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
+}
+
 .login .login-content .loginbtn,
-.signup .signup-content .signUpBtn{
+.signup .signup-content .container .signUpBtn,
+.upload .upload-content .uploadBtn .uploadFinalBtn,
+.upload .upload-content .uploadBtn .chooseImg,
+.write .write-content .container .writeBtn{
     width: 90%;
     display: block;
     padding: 10px;
@@ -177,7 +378,13 @@ html.body{
     border: none;
 } 
 
-.signup .signup-content .signUpWith{
+.upload .upload-content .uploadBtn .uploadFinalBtn,
+.upload .upload-content .uploadBtn .chooseImg{
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.signup .signup-content .container .signUpWith{
     background: var(--gradient-color2);
     color: whitesmoke;
 }
@@ -194,7 +401,9 @@ html.body{
 }
 
 .login .animate,
-.signup .animate{
+.signup .animate,
+.upload .animate,
+.write .animate{
   -webkit-animation: animatezoom 0.5s;
   animation: animatezoom 0.5s
 }
@@ -242,7 +451,7 @@ html.body{
 
 .wrapper .sidebar .sidebar-menu .closebtn{
     float: right;
-    margin-right: 10px;
+    margin-right: 1.5rem;
     font-size: 40px;
     text-decoration: none;
     color: whitesmoke;
@@ -324,11 +533,11 @@ html.body{
     padding: 2rem;
     transition: 0.5s;
     height: 100vh;
-    background: url(../image/los\ Angeles.jfif);
+    background:url(../image/los.jpg);
     background-size: cover;
     background-position: center;
 }
-
+    
 .wrapper .collapseSide{
     width: 0rem;
 }
@@ -338,18 +547,18 @@ html.body{
     margin-left: 0px;
 }
 
-.main-container .main-top{
+ .main-container .main-top{
     display: flex;
     /* position: relative; */
     /* justify-content: space-between; */
     margin-bottom: 2rem;
 }
 
-.main-container .main-top2{
+ .main-container .main-top2{
     display: flex;
 }
 
-.main-container .mainTop-btn{
+ .main-container .mainTop-btn{
     width: 120px;
     padding: 10px;
     margin: 10px;
@@ -494,6 +703,57 @@ html.body{
 
 
 
+
+<!--responsive-->
+
+
+
+
+
+@media screen and (max-width: 300px) {
+  .login .login-content span.psw {
+     display: block;
+     float: none;
+  }
+  .login .login-content .cancelbtn {
+     width: 100%;
+  }
+}
+
+@media screen and (max-width: 880px){
+   .write .write-content .writeContainer p{
+      font: bold 1.5rem/3rem var(--crimsonText);
+  }
+}
+
+@media screen and (max-width: 700px){
+   .write .write-content .writeContainer p{
+      font: bold 1.3rem/2rem var(--crimsonText);
+  }
+}
+
+@media screen and (max-width: 1130px) {
+   .main-container table{
+      table-layout: fixed; 
+      width: 780px;
+   }
+
+   .main-container .main-top{
+      width: 780px;
+   }
+
+   .main-container .pagination{
+      left: 18%;
+   }
+ }
+
+ @media screen and (min-width: 1131px){
+   .main-container .main-top{
+      display: flex;
+      justify-content: space-between;
+   }
+   
+ }
 
 
 

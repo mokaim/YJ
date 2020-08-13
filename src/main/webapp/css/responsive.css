@@ -1,0 +1,32 @@
+@media screen and (max-width: 300px) {
+  .login .login-content span.psw {
+     display: block;
+     float: none;
+  }
+  .login .login-content .cancelbtn {
+     width: 100%;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+   .main-container table{
+      table-layout: fixed; 
+      width: 780px;
+   }
+
+   .main-container .main-top{
+      width: 780px;
+   }
+
+   .main-container .pagination{
+      left: 18%;
+   }
+ }
+
+ @media screen and (min-width: 1131px){
+   .main-container .main-top{
+      display: flex;
+      justify-content: space-between;
+   }
+   
+ }

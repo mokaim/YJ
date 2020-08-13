@@ -2,7 +2,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.yeongjin</groupId>
+<<<<<<< HEAD
   <artifactId>master</artifactId>
+=======
+  <artifactId>Dayoung3460</artifactId>
+>>>>>>> 90b0d6ff3b3a4b6b105170da860fe5f92d9844f4
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Y Maven Webapp</name>

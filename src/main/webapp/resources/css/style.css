@@ -1,5 +1,4 @@
 
-
 *{
     margin: 0;
     padding: 0;
@@ -87,6 +86,17 @@ html.body{
     padding-top: 0px;
 }
 
+.write .write-content .container .content .uploadBox .write_upload{
+    display: none;
+    position: relative;
+    z-index: 4;
+    left: 0%;
+    top: 0%;
+    width: 100px;
+    height: 100px;
+    padding-top: 10px;
+}
+
  .login .login-content,
  .signup .signup-content,
  .upload .upload-content,
@@ -104,19 +114,25 @@ html.body{
 .login .login-content .imgcontainer,
 .signup .signup-content .welcomecontainer,
 .upload .upload-content .uploadContainer,
-.write .write-content .writeContainer{
+.write .write-content .writeContainer,
+.write-content .container .content .uploadBox .write_upload .write_upload-content .write_uploadContainer{
     text-align: center;
     margin: 8% 0;
     position: relative;
 }
 
-
+.write-content .container .content .uploadBox .write_upload .write_upload-content {
+    width: 300px;
+    height: 300px;
+    
+}
 
 .write .write-content .writeContainer{
     margin: 0;
 }
-
-.upload .upload-content .uploadContainer{
+    
+.upload .upload-content .uploadContainer,
+.write-content .container .content .uploadBox .write_upload .write_upload-content .write_uploadContainer{
     position: relative;
     height: 300px;
     width: 80%;
@@ -126,7 +142,16 @@ html.body{
     margin: 10% auto;
 }
 
-.upload .upload-content .uploadContainer .imgcontainer{
+ .write-content .container .content .blockBox{
+    height: 400px;
+}
+   
+.write-content .container .content .uploadBox .write_upload .write_upload-content .write_uploadContainer{
+    height: 80% !important;
+}
+
+.upload .upload-content .uploadContainer .imgcontainer,
+.write_upload .write_upload-content .write_uploadContainer .write_imgcontainer{
     position: absolute;
     height: 100%;
     width: 100%;
@@ -135,7 +160,8 @@ html.body{
     justify-content: center;
 }
 
-.upload .upload-content .uploadContainer .imgcontainer img{
+.upload .upload-content .uploadContainer .imgcontainer img,
+.write_upload .write_upload-content .write_uploadContainer .write_imgcontainer img{
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -156,7 +182,8 @@ html.body{
     color: var(--primary-color2);
 }
 
-.upload .upload-content .uploadContainer .uploadClose{
+.upload .upload-content .uploadContainer .uploadClose,
+.write_upload .write_upload-content .write_uploadContainer .write_uploadClose{
     position: absolute;
     right: 15px;
     top: 0;
@@ -166,15 +193,18 @@ html.body{
     display: none;
 }
 
-.upload .upload-content .uploadContainer.active{
-    border: none;
+.upload .upload-content .uploadContainer.active,
+.write_upload .write_upload-content .write_uploadContainer.active{
+    border: none !important;
 }
 
-.upload .upload-content .uploadContainer.active:hover .uploadClose{
+.upload .upload-content .uploadContainer.active:hover .uploadClose,
+.write_upload .write_upload-content .write_uploadContainer.active:hover .write_uploadClose{
     display: block;
 }
 
-.upload .upload-content .uploadContainer .file-name{
+.upload .upload-content .uploadContainer .file-name,
+.write_upload .write_upload-content .write_uploadContainer .write_file-name{
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -185,7 +215,15 @@ html.body{
     background: var(--primary-color);
   }
 
-.upload .upload-content .uploadContainer.active:hover .file-name{
+.write_upload .write_upload-content .write_uploadContainer .write_file-name{
+    padding: 4px 0;
+    font-size: 13px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.upload .upload-content .uploadContainer.active:hover .file-name,
+.write_upload .write_upload-content .write_uploadContainer.active:hover .write_file-name{
     display: block;
 }
 
@@ -217,7 +255,7 @@ html.body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font: bold 2rem/5rem var(--crimsonText);
+    font: bold 2rem/3rem var(--crimsonText);
     color: var(--title-color);
     padding: 15px;
     text-transform: uppercase;
@@ -241,6 +279,10 @@ html.body{
   font-size: 35px;
   font-weight: bold;
   z-index: 1;
+}
+
+.write .write-content .writeContainer .close{
+    right: 5% !important;
 }
 
 .upload .upload-content span .close {
@@ -268,13 +310,16 @@ html.body{
 .upload .upload-content .uploadContainer .close:hover,
 .upload .upload-content .uploadContainer .close:focus,
 .write .write-content .writeContainer .close:hover,
-.write .write-content .writeContainer .close:focus{
+.write .write-content .writeContainer .close:focus,
+.write_upload .write_upload-content .write_uploadContainer .close:hover,
+.write_upload .write_upload-content .write_uploadContainer .close:focus{
   color: red !important;
   cursor: pointer;
 }
 
-
-
+.write_uploadContainer .icon{
+    margin-top: 20px;
+}
 
 .login .login-content .container,
 .signup .signup-content .container,
@@ -283,7 +328,9 @@ html.body{
   margin: 30px;
 }
 
-
+.write-content .container .content .uploadBox{
+    margin-bottom: 15px;
+}
 
 .signup .signup-content .container{
     margin-top: 0px !important;
@@ -356,20 +403,22 @@ html.body{
 
 .write .write-content .container .content{
     width: 100%;
-    height: 150px;
+    height: 500px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    resize: none;
+    overflow: auto;
+    background: white;
 }
 
 .login .login-content .loginbtn,
 .signup .signup-content .container .signUpBtn,
 .upload .upload-content .uploadBtn .uploadFinalBtn,
 .upload .upload-content .uploadBtn .chooseImg,
-.write .write-content .container .writeBtn{
+.write .write-content .container .writeBtn,
+.write_upload-content .write_uploadBtn .chooseImg{
     width: 90%;
     display: block;
     padding: 10px;
@@ -377,6 +426,40 @@ html.body{
     background: var(--gradient-color);
     border: none;
 } 
+
+.write_upload-content .write_uploadBtn .chooseImg{
+    width: 40%;
+    padding: 5px;
+    background: var(--primary-color2);
+    color: whitesmoke;
+    border-radius: 8px;
+}
+
+.write-content .container .content{
+    overflow-y: scroll;
+    overflow-wrap: anywhere;
+    
+}
+
+.write-content .container .content .uploadBox a{
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 5px 20px;
+    display: inline-block;
+    background-color: var(--title-color);
+    color: var(--primary-color);
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.write-content .container .content .uploadBox a i{
+    display: none;
+}
+
+.write-content .container .content .uploadBox a:hover i{
+    display: inline-block;
+}
 
 .upload .upload-content .uploadBtn .uploadFinalBtn,
 .upload .upload-content .uploadBtn .chooseImg{
@@ -451,7 +534,7 @@ html.body{
 
 .wrapper .sidebar .sidebar-menu .closebtn{
     float: right;
-    margin-right: 1.5rem;
+    margin-right: 10px;
     font-size: 40px;
     text-decoration: none;
     color: whitesmoke;
@@ -533,11 +616,11 @@ html.body{
     padding: 2rem;
     transition: 0.5s;
     height: 100vh;
-    background:url(../image/los.jpg);
+    background: url(../image/los.jpg);
     background-size: cover;
     background-position: center;
 }
-    
+
 .wrapper .collapseSide{
     width: 0rem;
 }
@@ -547,18 +630,16 @@ html.body{
     margin-left: 0px;
 }
 
- .main-container .main-top{
+.main-container .main-top{
     display: flex;
-    /* position: relative; */
-    /* justify-content: space-between; */
     margin-bottom: 2rem;
 }
 
- .main-container .main-top2{
+.main-container .main-top2{
     display: flex;
 }
 
- .main-container .mainTop-btn{
+.main-container .mainTop-btn{
     width: 120px;
     padding: 10px;
     margin: 10px;
@@ -645,7 +726,9 @@ html.body{
     width: 30%;
 }
 
-.main-container table .col-no{
+.main-container table .col-no,
+.main-container table .col-views,
+.main-container table .col-like{
     width: 7%;
 }
 
@@ -661,14 +744,6 @@ html.body{
     width: auto;
 }
 
-.main-container table .col-views{
-    width: 7%;
-}
-
-.main-container table .col-like{
-    width: 7%;
-}
-
 .main-container table .tbl-title,
 .main-container table .tbl-writer{
     font-size: 17px;
@@ -679,6 +754,7 @@ html.body{
     margin: 2rem;
     display: inline-flex;
     left: 35%;
+    
   }
 
 .main-container .pagination a {
@@ -703,57 +779,6 @@ html.body{
 
 
 
-
-<!--responsive-->
-
-
-
-
-
-@media screen and (max-width: 300px) {
-  .login .login-content span.psw {
-     display: block;
-     float: none;
-  }
-  .login .login-content .cancelbtn {
-     width: 100%;
-  }
-}
-
-@media screen and (max-width: 880px){
-   .write .write-content .writeContainer p{
-      font: bold 1.5rem/3rem var(--crimsonText);
-  }
-}
-
-@media screen and (max-width: 700px){
-   .write .write-content .writeContainer p{
-      font: bold 1.3rem/2rem var(--crimsonText);
-  }
-}
-
-@media screen and (max-width: 1130px) {
-   .main-container table{
-      table-layout: fixed; 
-      width: 780px;
-   }
-
-   .main-container .main-top{
-      width: 780px;
-   }
-
-   .main-container .pagination{
-      left: 18%;
-   }
- }
-
- @media screen and (min-width: 1131px){
-   .main-container .main-top{
-      display: flex;
-      justify-content: space-between;
-   }
-   
- }
 
 
 

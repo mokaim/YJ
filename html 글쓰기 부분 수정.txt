@@ -1,0 +1,10 @@
+<div contentEditable="true" name="content" class="content" id="contentEditable"> ~ </div>
+
+이 부분 삭제하고 
+
+<textarea type="textarea" name="content" class="content" id="contentEditable" required> </textarea>
+
+이 것만 넣어주심 됩니다.
+
+파일 수정해서 다시 푸시하면 머지할 때 일이 더 많아질 것 같아서...ㅎㅎㅎ
+

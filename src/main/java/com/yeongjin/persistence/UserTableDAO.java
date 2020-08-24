@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.yeongjin.domain.UserDTO;
 import com.yeongjin.domain.UserTable;
 
 public class UserTableDAO {
@@ -19,22 +20,53 @@ public class UserTableDAO {
 		return instance;
 	}
 	
-	public Connection conn;
+	public Connection conn = null;
+	public PreparedStatement pstmt = null;
+	public ResultSet rs = null;
 	
-	// 회원가입
-	public synchronized int insertUserTable(UserTable userTable) {
+	
+	
+	public synchronized int getUserNumber() {
+		
+		conn = JDBCUtil.getInstance().getConnection();
+		int userNumber = 1;
+		
+		try {
+			pstmt = conn.prepareStatement("SELECT count(*) FROM UserTable");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return userNumber += rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+		
+		
+		
+		return -1;
+	
+	}
+	
+	
+	
+	// �쉶�썝媛��엯
+	public synchronized int insertUserTable(UserDTO userDTO) {
 		conn = JDBCUtil.getInstance().getConnection();
 		int Cnt = 0;
-		PreparedStatement pstmt = null;
-		String sql = "insert into UserTable values (?,?,?,?,?)";
+		int userNumber = getUserNumber();
+		String sql = "insert into UserTable values (?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userTable.getID());
-			pstmt.setString(2, userTable.getPW());
-			pstmt.setString(3, userTable.getNName());
-			pstmt.setString(4, userTable.getPhone());
-			pstmt.setString(5, userTable.getEmail());			
-			Cnt = pstmt.executeUpdate();		
+			pstmt.setInt(1, userNumber);
+			pstmt.setString(2, userDTO.getUserName());
+			pstmt.setString(3, userDTO.getEmail());
+			pstmt.setString(4, userDTO.getPw());
+			
+			Cnt = pstmt.executeUpdate();	
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -42,7 +74,12 @@ public class UserTableDAO {
 		}
 		finally {
 			try {
+				JDBCUtil.getInstance().rsClose(rs);
 				JDBCUtil.getInstance().pstmtClose(pstmt);
+				
+				pstmt = null;
+				rs = null;
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -50,7 +87,7 @@ public class UserTableDAO {
 		return Cnt;
 	}
 	
-	// 회원정보 수정
+	// �쉶�썝�젙蹂� �닔�젙
 	public synchronized int updateUserTable(UserTable userTable) {
 		conn = JDBCUtil.getInstance().getConnection();
 		int Cnt = 0;
@@ -80,11 +117,11 @@ public class UserTableDAO {
 		}
 		return Cnt;
 	}
-	// 회원탈퇴
+	// �쉶�썝�깉�눜
 	public synchronized int deleteUserTable(String id, String pw) {
 		conn = JDBCUtil.getInstance().getConnection();
 		int Cnt = 0;	
-		PreparedStatement pstmt = null;
+		pstmt = null;
 		String sql = "delete from UserTable where id = ? and pw = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -105,7 +142,7 @@ public class UserTableDAO {
 		}
 		return Cnt;
 	}
-	// 아이디로 닉네임 찾기
+	// �븘�씠�뵒濡� �땳�꽕�엫 李얘린
 	public synchronized String selectUserNName(String id) {
 		conn = JDBCUtil.getInstance().getConnection();
 		String selectID = null;
@@ -134,17 +171,19 @@ public class UserTableDAO {
 		}
 		return selectID;
 	}
-	// 로그인
-	public synchronized boolean LoginUser(String id, String pw) {
+	// 濡쒓렇�씤
+	public synchronized boolean LoginUser(String email, String pw) {
 		conn = JDBCUtil.getInstance().getConnection();
 		boolean result = false;
 		String DBpw;
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		String sql ="select PW from UserTable where id = ?";
+		rs = null;
+		pstmt = null;
+		
+		String sql ="SELECT pw FROM UserTable WHERE email = ?";
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -160,11 +199,15 @@ public class UserTableDAO {
 			try {								
 				JDBCUtil.getInstance().rsClose(rs);
 				JDBCUtil.getInstance().pstmtClose(pstmt);
+				JDBCUtil.getInstance().ConnClose(conn);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return result;
 	}
+	
+	
+
 	
 }

@@ -1,5 +1,6 @@
 package com.yeongjin.service;
 
+import com.yeongjin.domain.WriteDTO;
 import com.yeongjin.domain.WriteTable;
 import com.yeongjin.persistence.JDBCUtil;
 import com.yeongjin.persistence.UserTableDAO;
@@ -13,19 +14,34 @@ public class WriteService {
 		return nname;
 	}
 	
-	public boolean WriteInsert(WriteTable writeTable) {		
-		WriteTableDAO WriteDAO = WriteTableDAO.getinstance();
+	public boolean WriteInsert(WriteDTO writeDTO) {		
+		WriteTableDAO writeDAO = WriteTableDAO.getinstance();
+		
+		int userNumber = writeDAO.getUserNumber(writeDTO.getWriter());
+		int postNumber = writeDAO.getCountPost();
+		String date = writeDAO.getDate();
+		
+		writeDTO.setUserNumber(userNumber);
+		writeDTO.setPostNumber(postNumber);
+		writeDTO.setLikes(0);
+		writeDTO.setHate(0);
+		writeDTO.setVisit(0);	
+		writeDTO.setPosted_date(date);
+		
+				
+		
+		
 		
 		boolean isInsert = false;			
-		int Cnt = WriteDAO.insertWriteTable(writeTable);
+		int Cnt = writeDAO.insertWriteTable(writeDTO);
 		
 		if(Cnt > 0) {
-			JDBCUtil.getInstance().commit(WriteDAO.conn);
+			JDBCUtil.getInstance().commit(writeDAO.conn);
 			isInsert = true;
 		}else {
-			JDBCUtil.getInstance().commit(WriteDAO.conn);
+			JDBCUtil.getInstance().commit(writeDAO.conn);
 		}
-		JDBCUtil.getInstance().ConnClose(WriteDAO.conn);
+		JDBCUtil.getInstance().ConnClose(writeDAO.conn);
 		return isInsert;
 	}
 }

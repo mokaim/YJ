@@ -1,3 +1,9 @@
+
+
+
+
+
+
 @media screen and (max-width: 300px) {
   .login .login-content span.psw {
      display: block;
@@ -5,6 +11,28 @@
   }
   .login .login-content .cancelbtn {
      width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px){
+  .signup .signup-content,
+  .login .login-content,
+  .upload .upload-content{
+     width: 250px;
+  }
+  
+
+}
+
+@media screen and (max-width: 745px){
+   .signup .signup-content .container > .form-control:nth-of-type(4){
+      margin-bottom: 2rem;
+   }
+}
+
+@media screen and (max-width: 1020px){
+   .signup .signup-content .container > .form-control:nth-of-type(4){
+      margin-top: 1.7rem;
   }
 }
 
@@ -30,3 +58,10 @@
    }
    
  }
+
+ @media screen and (max-width: 1400px){
+   .write .write-content{
+      width: 750px;
+   }
+ }
+

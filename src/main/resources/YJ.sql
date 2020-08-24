@@ -1,37 +1,55 @@
 use YJ
 
 create table UserTable(
-ID varchar(12) unique not null,
-PW varchar(20) not null,
-NName varchar(12) not null,
-Phone varchar(13) unique not null,
-Email varchar(30) unique not null,
-primary key(NName)
+user_number int,
+user_name varchar(16),
+email varchar(64) unique not null,
+pw varchar(64) not null,
+primary key(user_number)
 )
+SELECT count(*) FROM UserTable
+select getdate()
+SELECT * FROM UserTable
 
 create table WriteTable(
-NName varchar(12) not null,
-Header Varchar(30) not null,
-Content Varchar(100) not null,
-Likes int not null,
-Hate int not null,
-Visit int not null,
-foreign key (NName) references UserTable(NName) on delete cascade
+post_number int primary key,
+user_number int,
+title Varchar(30) not null,
+content Varchar(100) not null,
+likes int not null,
+hate int not null,
+visit int not null,
+posted_date DATETIME
+foreign key (user_number) references UserTable(user_number) on delete cascade
 )
 
 insert into UserTable values
-('ID1','1234','UniqeNick','010-1234-5678','emaisk@naver.com')
+(1,'둘이','onepice@naver.com','1234')
 insert into UserTable values
-('ID2','1234','QWER1234','010-5475-9458','asdwss@naver.com')
+(2,'길동이','naruto@naver.com','1234')
 insert into UserTable values
-('ID3','1234','ASDF1234','010-1254-7754','gsdfge@naver.com')
+(3,'도우너','bleach@naver.com','1234')
 insert into UserTable values
-('ID5','1234','XCVB124','010-6768-8444','123ssq@naver.com')
+(4,'또치','onepunchman@naver.com','1234')
 
 insert into WriteTable values
-('UniqeNick','제목',' 컨텐츠 MaxLength 100 입니다.!@#$',0,0,0)
+(1,1,'제목',' 컨텐츠 MaxLength 100 입니다.!@#$',0,0,0,'2020-08-18')
 insert into WriteTable values
-('UniqeNick','HeaderTest3','MaxLength 100 입니다.!@#$',0,0,0)
+(2,1,'HeaderTest3','MaxLength 100 입니다.!@#$',0,0,0,'2020-08-18')
 
 select * from UserTable
 select * from WriteTable
+drop table WriteTable
+drop table UserTable
+
+select u.user_number,
+	   w.post_number,
+	   u.email as writer,
+	   
+	   w.title,
+	   w.content,
+	   w.likes,
+	   w.hate,
+	   w.visit,
+	   w.posted_date	   
+	   from UserTable u inner join WriteTable w on u.user_number = w.user_number order by w.post_number desc;

@@ -8,13 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.yeongjin.action.Action;
 import com.yeongjin.action.WriteAction;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Servlet implementation class WriteInsertService
  */
+@Slf4j
 @WebServlet("/writer")
 public class WriteInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,9 +50,25 @@ public class WriteInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Action action = new WriteAction();
 		
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession(true);
+		
+		 
+		
+		
+		
+		
+		String id = (String)session.getAttribute("id");
 		String header = request.getParameter("Header");
-		String content = request.getParameter("Content");
+		//String content = request.getParameter("Content");
+		
+		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		content = "hello world";
+		
+		log.info("글쓰기 타이틀 테스트 : " + title);
+		log.info("글쓰기 내용 테스트 : " + content);
+		
 		
 		request.setAttribute("id", id);
 		request.setAttribute("header", header);

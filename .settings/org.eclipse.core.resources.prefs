@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/yeongjin/controller/LoginController.java=UTF-8
+encoding//src/main/java/com/yeongjin/domain/UserDTO.java=UTF-8
+encoding//src/main/java/com/yeongjin/domain/UserTable.java=UTF-8
+encoding//src/main/java/com/yeongjin/persistence/JDBCUtil.java=UTF-8
+encoding//src/main/java/com/yeongjin/persistence/UserTableDAO.java=UTF-8
+encoding//src/main/java/com/yeongjin/persistence/WriteTableDAO.java=UTF-8

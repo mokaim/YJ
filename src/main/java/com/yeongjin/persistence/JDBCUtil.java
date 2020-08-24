@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class JDBCUtil {
 	
 	private JDBCUtil() {}
@@ -20,14 +23,27 @@ public class JDBCUtil {
 	public Connection getConnection() {		
 		Connection conn = null;
 		try {
-			String jdbcDriver = "jdbc:sqlserver://localhost:10161;databaseName=YJ;";
+			
+			String jdbcDriver = "jdbc:sqlserver://localhost:1433;databaseName=YJ";
 			String dbUser = "sa";
-			String dbPass = "1234";
+			String dbPass = "anstn132";
+			
+			try {
+				
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			conn.setAutoCommit(false);
-		}catch(SQLException e) {
-			e.printStackTrace();
-			System.out.println("DB 연결 오류");
+			
+		}catch(SQLException e) {		
+			
+			log.warn("DB 연결에 문제발생!");
+			e.printStackTrace();			
 		}
 		return conn;
 	}
@@ -38,7 +54,7 @@ public class JDBCUtil {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("ConnClose Error");
+			log.warn("ConnClose Error");
 		}
 	}
 	
@@ -47,7 +63,7 @@ public class JDBCUtil {
 			rs.close();
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("rsClose Error");
+			log.warn("rsClose Error");
 		}
 	}
 	
@@ -56,7 +72,7 @@ public class JDBCUtil {
 			pstmt.close();
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("pstmtClose Error");
+			log.warn("pstmtClose Error");
 		}
 	}
 	//DCL
@@ -65,7 +81,7 @@ public class JDBCUtil {
 			conn.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("Commit Error");
+			log.warn("Commit Error");
 		}
 	}
 	public void Rollback(Connection conn) {
@@ -73,7 +89,7 @@ public class JDBCUtil {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("Rollback Error");
+			log.warn("Rollback Error");
 		}
 	}	
 }

@@ -44,6 +44,11 @@ public class SignUpController extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String pw2 = request.getParameter("pw2");
 		
+		log.info("username : " + username);
+		log.info("email : " + email);
+		log.info("pw : " + pw);
+		log.info("pw2 : " + pw2);
+		
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUserName(username);
 		userDTO.setEmail(email);

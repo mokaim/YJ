@@ -83,6 +83,46 @@ public class WriteTableDAO {
 	}
 	
 	
+	
+	public synchronized List<WriteDTO> getViewList(int viewId) {
+		
+		String query = "select write.post_number,\r\n" + 
+				"	   write.title,\r\n" + 
+				"	   write.content,\r\n" + 
+				"	   write.likes,\r\n" + 
+				"	   write.hate,\r\n" + 
+				"	   write.visit,\r\n" + 
+				"	   img.imageLocation from WriteTable write left join ImageTable img on write.post_number = img.post_number where write.post_number = ?";
+		
+	
+		WriteDTO writeDTO = new WriteDTO();
+		conn = JDBCUtil.getInstance().getConnection();
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, viewId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+
+			}
+			
+			
+		}catch (SQLException e) {
+			// TODO: handle exception
+			
+		}
+		
+		
+		
+		return writeDTO;
+	}
+	
+	
+	
+	
+	
 	public synchronized int insertWriteTable(WriteDTO writeDTO) {
 		
 		int Cnt = 0;

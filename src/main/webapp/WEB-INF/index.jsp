@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page isELIgnored="false" %>>
+<%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -12,11 +12,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Team Project Board</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/responsive.css">
-        <link rel="stylesheet" href="./resources/css/fonts.css">
-        <link rel="stylesheet" href="./resources/css/variables.css">
         <link rel="stylesheet" href="./resources/css/global.css">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Russo+One&display=swap" rel="stylesheet">
+        
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        
 
     </head>
     <body>
@@ -63,7 +69,7 @@
                             
                         <li><a href="#" class="button" style="width:auto;" onclick="openSignup()">Sign Up</a></li>
                             <div id="signup" class="signup">
-                                <div action="#" method="post" class="signup-content animate">
+                                <div class="signup-content animate">
                                     <div class="welcomecontainer">
                                         <span><a class="close" onclick="closeSignup()">x</a></span>
                                         <div>Be one of our <p class="">Awesome People!</p></div>
@@ -206,48 +212,32 @@
                         </div>
                         
                         <c:if test="${user != null}">
-                            <button class="mainTop-btn" onclick="openWrite()">Write</button>
+							<button class="mainTop-btn" onclick="openWrite()">Write</button>
                             <div id="write" class="write">
                                 <form action="/master/writer" method="post" class="write-content animate">
                                     <div class="writeContainer">
                                         <span><a class="close" onclick="closeWrite()">x</a></span>
-                                        <img src="./resources/image/writeBG.jpg" alt="writeImg" class="writeImg" ></img>
+                                        <img src="./image/writeBG.jpg" alt="writeImg" class="writeImg" ></img>
                                         <p>Share your thoughts</p>
                                     </div>
                                     <div class="container">
                                         <label for="title"><b>Title</b></label>
-                                        <input type="text" name="title" required></input>
+                                        <input type="text" name="title" required placeholder="Title here"></input>
                                         <br>
-                                        
                                         <label for="content"><b>Content</b></label>
-                                        <div contentEditable="true" name="content" class="content" id="contentEditable">
-                                            <div class="uploadBox">
-                                                <a href="#" onclick="write_openUploadImg()"><i class="fas fa-camera"></i><span contentEditable="false"> Attach Photo</span></a>
-                                                <div id="write_upload" class="write_upload" contenteditable="false">
-                                                    <div class="write_upload-content" id="uploadBox">
-                                                        <div class="write_uploadContainer">
-                                                            <div class="write_imgcontainer">
-                                                                <img class="write_uploadImg" src="" alt="">
-                                                            </div>
-                                                            <div class="icon"><i class="fas fa-file-image"></i></div>
-                                                            <div class="text" contenteditable="false">No file chosen yet.</div>
-                                                            <div class="close write_uploadClose">x</div>
-                                                            <div class="write_file-name">File name here</div>
-                                                        </div>
-                                                        <div class="write_uploadBtn">
-                                                            <button onclick="write_chooseImg()" class="chooseImg" contenteditable="false">Choose a file</button>
-                                                            <input class="write_openFileBtn" type="file" hidden>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span contentEditable="false"><i class="far fa-laugh-squint"></i> Spread your story <i class="far fa-grin-stars"></i></span>
-                                            <span>>>></span>
-                                        </div>
+                                        <textarea type="textarea" name="content" class="content" required> </textarea>
+                                        <br>
+                                        <label for="image"><b>Attach Image</b></label>
+                                        <br>
+                                        <input type="file" name="uploadFile" class="inputImg">
+                                            <div class="write_imgcontainer">
+                                                <img class="write_uploadImg" src="" alt="" width="100%" height="auto">
+                                            </div>         
+                                        
                                         <button class="writeBtn" type="submit">Post</button>
                                     </div>
                                 </form>
-                            </div> 
+                            </div>
                         </c:if>
                         
 
@@ -269,7 +259,7 @@
                     <c:forEach var="writeDTO" items="${list}">
                        <tr>
                         <th scope="row">${writeDTO.postNumber}</th>
-                        <td class="tbl-title">${writeDTO.title}</td>
+                        <td id="view${writeDTO.postNumber}" class="tbl-title" onclick="openContent('${writeDTO.postNumber}')">${writeDTO.title}</td>
                         <td class="tbl-writer">${writeDTO.writer}</td>
                         <td>${writeDTO.posted_date}</td>
                         <td>${writeDTO.visit}</td>
@@ -282,17 +272,82 @@
                       
                     </tbody>
                   </table>
+                  
+                  
+                <c:set var="currentPage" value="${currentPage}"></c:set>
+                <c:set var="totalPage" value="${totalPage}"></c:set>
+                
+                
+                  
+                <div class="pagination" id="pagination">
+                
+                  <c:choose>
+                  	<c:when test="${currentPage <= 1}">
+                  		<a href="/master/?page=1">&laquo;</a>
+                  	</c:when>
+                  	
+                  	<c:otherwise>
+                  		<a href="/master/?page=${currentPage - 1}">&laquo;</a>
+                  	</c:otherwise>
+                  	
+                  </c:choose>
+                  
+                  
+                  <c:forEach var="paging" items="${pagingNumber}">
 
-                  <div class="pagination" id="pagination">
-                    <a href="#">&laquo;</a>
-                    <a href="#" class="activePage">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">&raquo;</a>
-                  </div>
+					<c:choose>
+					
+					  <c:when test="${currentPage eq paging}">
+					  	<a href="/master/?page=${paging}" class="activePage">${paging}</a>
+					  </c:when>
+					  
+					  <c:otherwise>	
+					  	<a href="/master/?page=${paging}" class="">${paging}</a>
+					  </c:otherwise>
+					  
+					</c:choose>
+
+                  </c:forEach>
+                  
+                  
+                  <c:choose>
+                  	<c:when test="${currentPage >= totalPage}">
+                  		<a href="/master/?page=${totalPage}">&raquo;</a>
+                  	</c:when>
+                  	
+                  	<c:otherwise>
+                  		<a href="/master/?page=${currentPage + 1}">&raquo;</a>
+                  	</c:otherwise>
+                  	
+                  </c:choose>
+
+                </div>
+                
+
+                
+                <div class="detailPage">
+                        <div class="detailContainer">
+                            <p id="dPageTxt">see what others think</p>
+                        </div>
+                        <form class="container" name="detailPageForm">
+                            <label for="title"><b>Title</b></label>
+                            <textarea class="title" readonly name="dPageTitle"></textarea>
+                            <br>
+                            <label for="content"><b>Content</b></label>
+                            <textarea class="content" readonly name="dPageContent"> </textarea>
+                            <br>
+                            <label for="image"><b>Image</b></label>
+                            <div class="img"></div>
+                            <br>
+                            <button class="writeBtn" onclick="backToList()">Back</button>
+                        </form>
+                </div>
+                
+
+                
+                
+                
+                
             </div>
 
 
@@ -310,10 +365,8 @@
             const uploadClose = document.querySelector('.uploadClose');
             const uploadImg = document.querySelector('.uploadImg');
 
-	        const write_uploadContainer = document.querySelector('.write_uploadContainer');
-            const write_fileName = document.querySelector('.write_file-name');
-            const write_openFileBtn = document.querySelector('.write_openFileBtn');
-            const write_uploadClose = document.querySelector('.write_uploadClose');
+	        const write_imgcontainer = document.querySelector('.write_imgcontainer');
+            const inputImg = document.querySelector('.inputImg');
             const write_uploadImg = document.querySelector('.write_uploadImg');
 
             let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
@@ -346,16 +399,10 @@
                 let valueStore = this.value.match(regExp);
                 fileName.textContent = valueStore;
                 }
-            });
+            }); 
 
 
-
-            
-            function write_chooseImg(){
-                write_openFileBtn.click();
-            }
-
-            write_openFileBtn.addEventListener("change", function(){
+            inputImg.addEventListener("change", function(){
                 const file = this.files[0];
 
                 if(file){
@@ -364,23 +411,53 @@
                 reader.onload = function(){
                     const result = reader.result;
                     write_uploadImg.src = result;
-                    write_uploadContainer.classList.add("active");
+                    write_imgcontainer.classList.add("active");
                 }
-
-                write_uploadClose.addEventListener("click", function(){
-                    write_uploadImg.src = "";
-                    write_uploadContainer.classList.remove("active");
-                })
 
                 reader.readAsDataURL(file);
                 }
-
-                if(this.value){
-                let valueStore = this.value.match(regExp);
-                write_fileName.textContent = valueStore;
-                }
             });
 
+
+
+			function openContent(test){
+
+				//var myNum = "<c:out value='${totalPage}'/>";
+				var myNum = test;
+				
+				mainTop.style.display = 'none';
+				table.style.display = 'none';
+				pagination.style.display = 'none';
+				detailPage.style.display = 'block';
+
+				alert('myNum : ' + myNum);
+
+				$.ajax({
+
+					type : 'get',
+					url : '/index/view',
+					data : 'from ajax',
+					success : function(result){
+						alert('성공');
+					},error : function(request,status,err){
+
+						alert('실패함..;;' + err);
+					}
+					
+
+				});
+
+
+				
+			}
+						
+			
+
+
+            
+
+
+            
        </script>
     </body>
 </html>

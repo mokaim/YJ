@@ -27,7 +27,7 @@ public class WriteAction implements Action{
 		
 		
 		String title = (String)request.getAttribute("title");
-		title = "test";
+		
 		String content = (String)request.getAttribute("content");
 		log.info("title : " + title);
 		log.info("content : " + content);

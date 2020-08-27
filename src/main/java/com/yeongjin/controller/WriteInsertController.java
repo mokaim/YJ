@@ -52,11 +52,7 @@ public class WriteInsertController extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		
-		 
-		
-		
-		
-		
+
 		String id = (String)session.getAttribute("id");
 		String header = request.getParameter("Header");
 		//String content = request.getParameter("Content");
@@ -64,13 +60,14 @@ public class WriteInsertController extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		content = "hello world";
+		
 		
 		log.info("글쓰기 타이틀 테스트 : " + title);
 		log.info("글쓰기 내용 테스트 : " + content);
 		
 		
 		request.setAttribute("id", id);
+		request.setAttribute("title", title);
 		request.setAttribute("header", header);
 		request.setAttribute("content", content);
 		

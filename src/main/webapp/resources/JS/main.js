@@ -1,37 +1,20 @@
 
 
-// const uploadBox2 = document.querySelector('#uploadBox');
-
-
-
-
-// uploadBox2.onkeydown = function () {
-// 	var kcode = event.keyCode;
-// 	if (kcode == 8 || kcode == 116) event.returnValue = false;
-// }
-
-
-
+const main = document.getElementById("myMain");
+const side = document.getElementById("mySidebar");
 
 function toggleSidebar(){
-    var main = document.getElementById("myMain");
     main.classList.toggle("collapseMain");
-    var side = document.getElementById("mySidebar");
     side.classList.toggle("collapseSide");
 }
 
-var logIn = document.getElementById('id01');
-var signUp = document.getElementById('signup');
-var upLoad = document.getElementById('upload');
-var write = document.getElementById('write');
-var page = document.getElementById('pagination');
-var write_upload = document.getElementById('write_upload');
-
-// window.onclick = function(e) {
-//         if (e.target != login){
-//             e.style.display = "none";
-//         }
-//     }
+const logIn = document.getElementById('id01');
+const signUp = document.getElementById('signup');
+const upLoad = document.getElementById('upload');
+const write = document.getElementById('write');
+const page = document.getElementById('pagination');
+const write_upload = document.getElementById('write_upload');
+const dPageTxt = document.getElementById('dPageTxt');
 
 function openLogin(){
     logIn.style.display = 'block';
@@ -49,32 +32,26 @@ function closeSignup(){
     signUp.style.display = 'none';
 }
 
+
 function openUploadImg(){
     upLoad.style.display = 'block';
-    page.style.display = 'none';
-    
+	page.style.zIndex = '-1';
+	dPageTxt.style.zIndex = '-1';
 }
 
 function closeUploadImg(){
     upLoad.style.display = 'none';
-    page.style.display = 'block';
+	page.style.zIndex = '0';
+	dPageTxt.style.zIndex = '0';
 }
 
 function openWrite(){
-    write.style.display = 'block';
+	write.style.display = 'block'
 }
 
 function closeWrite(){
     write.style.display = 'none';
 }
-
-const uploadBox = document.querySelector('.uploadBox');
-
-function write_openUploadImg(){
-	write_upload.style.display = 'block';
-	uploadBox.classList.add("blockBox");
-}
-
 
 
 
@@ -89,7 +66,7 @@ const pw = document.getElementById('pw');
 const pw2 = document.getElementById('pw2');
 
 signUpForm.addEventListener('submit', e => {
-	//e.preventDefault();
+	// e.preventDefault();
 	
 	checkInputs();
 });
@@ -153,4 +130,18 @@ function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
+// ====================== Detail Page =================
 
+const mainTop = document.querySelector(".main-top");
+const table = document.querySelector('table');
+const pagination = document.querySelector(".pagination");
+const detailPage = document.querySelector(".detailPage");
+
+
+function backToList(){
+	detailPage.style.display = 'none';
+	mainTop.style.display = 'flex';
+	table.style.display = 'inline-table';
+	pagination.style.display = 'block';
+
+}

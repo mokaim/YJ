@@ -1,12 +1,21 @@
 
+
+:root{
+    --primary-color: #1c2a83;
+    --primary-color2: #1b105c;
+    --title-color: #d3e958;
+    --border-color: #201f1f17;
+    --gradient-color: linear-gradient(90deg,  #899b4a 0%, #d3e958 100%);
+    --gradient-color2: linear-gradient(90deg,  #647eb1 0%, #102686 100%);
+    --box-shadow: 0px 10px 30px #48485034;
+}
+
 *{
     margin: 0;
     padding: 0;
     list-style: none;
     box-sizing: border-box;
-    font-family: var(--crimsonText);
-    
-    
+    font-family: 'Roboto', sans-serif;
 }
 
 *, *::before, *::after{
@@ -25,7 +34,7 @@ html.body{
     background: whitesmoke;
 }
 
-/*=============== header menu ==================*/
+/*=============== header / side menu ==================*/
 
 .wrapper .header{
     z-index: 1;
@@ -46,13 +55,59 @@ html.body{
     padding: 0, 20rem;
 }
 
-.wrapper .header .header-menu a{
-    text-decoration: none;
-}
-
 .wrapper .header .header-menu .header-text{
     position: absolute;
     margin-left: 2rem;
+}
+
+.wrapper .header .header-menu .header-text a{
+    text-decoration: none;
+    font: normal bold 40px/72px 'Roboto', sans-serif;
+    text-transform: uppercase;
+    color: var(--title-color);
+}
+
+/* login and signup btn */
+.button{
+    position: relative;
+    color: var(--primary-color);
+    font-weight: 850;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .7rem 1.2rem;
+    margin: 1rem;
+    z-index: 1;
+}
+
+.button::before{
+    content: ' ';
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px; 
+    background: var(--title-color);
+    border: var(--primary-color) solid 3px;
+    z-index: -1;
+
+}
+
+.button::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    background: #fff;
+    transform: rotate(0);
+    transition: transform .2s;
+    z-index: -2;
+
+}
+
+.button:hover::after{
+    transform: rotate(-4deg) translate(1%, -5%);
 }
 
 .wrapper .header .header-menu .openbtn{
@@ -86,53 +141,63 @@ html.body{
     padding-top: 0px;
 }
 
-.write .write-content .container .content .uploadBox .write_upload{
+.detailPage{
     display: none;
-    position: relative;
-    z-index: 4;
-    left: 0%;
-    top: 0%;
-    width: 100px;
-    height: 100px;
-    padding-top: 10px;
+    background: rgba(220,220,235,0.8);
+    margin: 5% auto;
+    width: 90%;
+    text-align: center;
+    padding-bottom: 70px;
 }
 
  .login .login-content,
  .signup .signup-content,
  .upload .upload-content,
- .write .write-content {
+ .write .write-content{
     background-color: whitesmoke;
     margin:100px auto;
     border: 1px solid var(--primary-color2);
     width: 40%;
 }
 
-.write .write-content{
-    width: 60%;
-}
-
 .login .login-content .imgcontainer,
 .signup .signup-content .welcomecontainer,
 .upload .upload-content .uploadContainer,
-.write .write-content .writeContainer,
-.write-content .container .content .uploadBox .write_upload .write_upload-content .write_uploadContainer{
+.write .write-content .writeContainer{
     text-align: center;
     margin: 8% 0;
     position: relative;
 }
 
-.write-content .container .content .uploadBox .write_upload .write_upload-content {
-    width: 300px;
-    height: 300px;
-    
+.detailPage .writeContainer{
+    text-align: center;
+    position: relative;
+    margin: 0;
 }
 
 .write .write-content .writeContainer{
     margin: 0;
 }
+
+.detailPage .container .content{
+    width: 80%;
+    height: 200px;
+    border: 1px solid var(--title-color);
+    display: inline-flex;
+    margin-bottom: 5px;
+}
+
+.detailPage .container textarea{
+    overflow-y: auto;
+    resize: none;
+}
+
+.write .write-content .container textarea{
+    resize: none;
+    margin-bottom: 10px;
+}
     
-.upload .upload-content .uploadContainer,
-.write-content .container .content .uploadBox .write_upload .write_upload-content .write_uploadContainer{
+.upload .upload-content .uploadContainer{
     position: relative;
     height: 300px;
     width: 80%;
@@ -145,13 +210,10 @@ html.body{
  .write-content .container .content .blockBox{
     height: 400px;
 }
-   
-.write-content .container .content .uploadBox .write_upload .write_upload-content .write_uploadContainer{
-    height: 80% !important;
-}
+
 
 .upload .upload-content .uploadContainer .imgcontainer,
-.write_upload .write_upload-content .write_uploadContainer .write_imgcontainer{
+.write .write-content .container .inputImg .write_imgcontainer{
     position: absolute;
     height: 100%;
     width: 100%;
@@ -160,8 +222,15 @@ html.body{
     justify-content: center;
 }
 
-.upload .upload-content .uploadContainer .imgcontainer img,
-.write_upload .write_upload-content .write_uploadContainer .write_imgcontainer img{
+.detailPage .container .img{
+    width: 80%;
+    height: 200px;
+    border: 1px solid var(--title-color);
+    display: inline-flex;
+    margin: 0 0 5px 11px;
+}
+
+.upload .upload-content .uploadContainer .imgcontainer img{
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -182,8 +251,7 @@ html.body{
     color: var(--primary-color2);
 }
 
-.upload .upload-content .uploadContainer .uploadClose,
-.write_upload .write_upload-content .write_uploadContainer .write_uploadClose{
+.upload .upload-content .uploadContainer .uploadClose{
     position: absolute;
     right: 15px;
     top: 0;
@@ -193,18 +261,15 @@ html.body{
     display: none;
 }
 
-.upload .upload-content .uploadContainer.active,
-.write_upload .write_upload-content .write_uploadContainer.active{
+.upload .upload-content .uploadContainer.active{
     border: none !important;
 }
 
-.upload .upload-content .uploadContainer.active:hover .uploadClose,
-.write_upload .write_upload-content .write_uploadContainer.active:hover .write_uploadClose{
+.upload .upload-content .uploadContainer.active:hover .uploadClose{
     display: block;
 }
 
-.upload .upload-content .uploadContainer .file-name,
-.write_upload .write_upload-content .write_uploadContainer .write_file-name{
+.upload .upload-content .uploadContainer .file-name{
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -215,15 +280,7 @@ html.body{
     background: var(--primary-color);
   }
 
-.write_upload .write_upload-content .write_uploadContainer .write_file-name{
-    padding: 4px 0;
-    font-size: 13px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.upload .upload-content .uploadContainer.active:hover .file-name,
-.write_upload .write_upload-content .write_uploadContainer.active:hover .write_file-name{
+.upload .upload-content .uploadContainer.active:hover .file-name{
     display: block;
 }
 
@@ -236,26 +293,42 @@ html.body{
   border-radius: 50%;
 }
 
+.detailPage .detailContainer{
+    text-align: center;
+    margin-bottom: 60px;
+    padding-top: 10px;
+}
+
 .write .write-content .writeContainer img{
     width: 100%;
-    opacity: .8;
-    z-index: -1;
 }
+
 
 .signup .signup-content .welcomecontainer div{
     justify-content: center;
-    font: bold 1.5rem/55px var(--crimsonText);
+    font: bold 1.5rem/55px 'Roboto', sans-serif;
     color: var(--primary-color2);
     padding: 15px;
     text-transform: uppercase;
 }
+
 
 .write .write-content .writeContainer p{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font: bold 2rem/3rem var(--crimsonText);
+    font: normal 2rem/3rem 'Russo One', sans-serif;
+    color: var(--title-color);
+    padding: 15px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px var(--primary-color), -2px -2px 0px  var(--primary-color), 2px -2px 0px  var(--primary-color), -2px 2px 0px  var(--primary-color);
+}
+
+.detailPage .detailContainer p{
+    position: relative;
+    left: 3%;
+    font: normal 2rem/3rem 'Russo One', sans-serif;
     color: var(--title-color);
     padding: 15px;
     text-transform: uppercase;
@@ -263,7 +336,7 @@ html.body{
 }
 
 .signup .signup-content .welcomecontainer p{
-    font: normal bold 2rem var(--crimsonText);
+    font: normal bold 2rem 'Roboto', sans-serif;
     text-transform: uppercase;
     color: var(--title-color);
 }
@@ -310,15 +383,9 @@ html.body{
 .upload .upload-content .uploadContainer .close:hover,
 .upload .upload-content .uploadContainer .close:focus,
 .write .write-content .writeContainer .close:hover,
-.write .write-content .writeContainer .close:focus,
-.write_upload .write_upload-content .write_uploadContainer .close:hover,
-.write_upload .write_upload-content .write_uploadContainer .close:focus{
+.write .write-content .writeContainer .close:focus{
   color: red !important;
   cursor: pointer;
-}
-
-.write_uploadContainer .icon{
-    margin-top: 20px;
 }
 
 .login .login-content .container,
@@ -328,8 +395,9 @@ html.body{
   margin: 30px;
 }
 
-.write-content .container .content .uploadBox{
-    margin-bottom: 15px;
+.detailPage .container label{
+    float: left;
+    padding-left: 20px;
 }
 
 .signup .signup-content .container{
@@ -352,9 +420,19 @@ html.body{
   box-sizing: border-box;
 }
 
+.detailPage .container .title{
+    width: 80%;
+    height: 40px;
+    border: 1px solid var(--title-color);
+    display: inline-flex;
+    margin: 0 0 5px 25px;
+}
+
 .login .login-content input,
 .signup .signup-content .container .form-control input,
-.write .write-content .container input{
+.write .write-content .container input,
+.detailPage .container div,
+.detailPage .container textarea{
     border-radius: 4px;
 }
 
@@ -403,7 +481,33 @@ html.body{
 
 .write .write-content .container .content{
     width: 100%;
-    height: 500px;
+    height: 300px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    overflow: auto;
+    background: white;
+}
+
+.detailPage .container div{
+    width: 100%;
+    height: 300px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    background: white;
+}
+
+.write .write-content .container .inputImg{
+    margin: 10px;
+}
+
+.write .write-content .container .write_imgcontainer{
+    width: 100%;
+    height: 300px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -417,8 +521,7 @@ html.body{
 .signup .signup-content .container .signUpBtn,
 .upload .upload-content .uploadBtn .uploadFinalBtn,
 .upload .upload-content .uploadBtn .chooseImg,
-.write .write-content .container .writeBtn,
-.write_upload-content .write_uploadBtn .chooseImg{
+.write .write-content .container .writeBtn{
     width: 90%;
     display: block;
     padding: 10px;
@@ -427,38 +530,19 @@ html.body{
     border: none;
 } 
 
-.write_upload-content .write_uploadBtn .chooseImg{
-    width: 40%;
-    padding: 5px;
-    background: var(--primary-color2);
-    color: whitesmoke;
-    border-radius: 8px;
+
+.detailPage .container button{
+    width: 30%;
+    padding: 10px;
+    margin: 10px 10% 10px 0;
+    background: var(--gradient-color);
+    border: none;
+    float: right;
 }
 
 .write-content .container .content{
     overflow-y: scroll;
     overflow-wrap: anywhere;
-    
-}
-
-.write-content .container .content .uploadBox a{
-    text-decoration: none;
-    border-radius: 4px;
-    padding: 5px 20px;
-    display: inline-block;
-    background-color: var(--title-color);
-    color: var(--primary-color);
-    text-align: center;
-    transition: 0.5s ease;
-    cursor: pointer;
-}
-
-.write-content .container .content .uploadBox a i{
-    display: none;
-}
-
-.write-content .container .content .uploadBox a:hover i{
-    display: inline-block;
 }
 
 .upload .upload-content .uploadBtn .uploadFinalBtn,
@@ -696,10 +780,7 @@ html.body{
   }
 
  .main-container table{
-    margin: 0;
-    padding: 0;
     width: 100%;
-    font-size: 13px;
     border-collapse: collapse;
   }
 
@@ -726,6 +807,10 @@ html.body{
     width: 30%;
 }
 
+.main-container table .tbl-title:hover{
+    cursor: pointer;
+}
+
 .main-container table .col-no,
 .main-container table .col-views,
 .main-container table .col-like{
@@ -749,12 +834,13 @@ html.body{
     font-size: 17px;
 }
 
+
+
 .main-container .pagination {
     position: relative;
     margin: 2rem;
     display: inline-flex;
     left: 35%;
-    
   }
 
 .main-container .pagination a {
@@ -764,6 +850,7 @@ html.body{
     text-decoration: none;
     position: relative;
     margin: .3rem;
+    
   }
 
 .main-container .pagination a.activePage {
@@ -777,6 +864,72 @@ html.body{
     border-radius: 5px;
   }
 
+
+  /* ================== responsive ================== */
+
+  @media screen and (max-width: 300px) {
+    .login .login-content span.psw {
+       display: block;
+       float: none;
+    }
+    .login .login-content .cancelbtn {
+       width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 700px){
+    .signup .signup-content,
+    .login .login-content,
+    .upload .upload-content{
+       width: 250px;
+    }
+    
+  }
+  
+  @media screen and (max-width: 745px){
+     .signup .signup-content .container > .form-control:nth-of-type(4){
+        margin-bottom: 2rem;
+     }
+  }
+  
+  @media screen and (max-width: 1020px){
+     .signup .signup-content .container > .form-control:nth-of-type(4){
+        margin-top: 1.7rem;
+    }
+     .main-container .detailPage{
+       width: 580px;
+    }
+  }
+  
+  @media screen and (max-width: 1130px) {
+     .main-container table{
+        table-layout: fixed; 
+        width: 780px;
+     }
+  
+     .main-container .main-top{
+        width: 780px;
+     }
+  
+     .main-container .pagination{
+        left: 18%;
+     }
+   }
+  
+   @media screen and (min-width: 1131px){
+     .main-container .main-top{
+        display: flex;
+        justify-content: space-between;
+     }
+     
+   }
+  
+   @media screen and (max-width: 1400px){
+     .write .write-content,
+     .detailPage .detail-content{
+        width: 750px;
+     }
+   }
 
 
 

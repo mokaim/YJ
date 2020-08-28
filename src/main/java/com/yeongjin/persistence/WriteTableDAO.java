@@ -61,7 +61,7 @@ public class WriteTableDAO {
 						rs.getInt(6),
 						rs.getInt(7),
 						rs.getInt(8),
-						rs.getString(9).substring(0,10)));
+						rs.getString(9).substring(0,10), ""));
 				
 			
 			}
@@ -84,6 +84,7 @@ public class WriteTableDAO {
 	
 	
 	
+	
 	public synchronized List<WriteDTO> getViewList(int viewId) {
 		
 		String query = "select write.post_number,\r\n" + 
@@ -95,18 +96,34 @@ public class WriteTableDAO {
 				"	   img.imageLocation from WriteTable write left join ImageTable img on write.post_number = img.post_number where write.post_number = ?";
 		
 	
-		WriteDTO writeDTO = new WriteDTO();
+		
 		conn = JDBCUtil.getInstance().getConnection();
 		try {
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, viewId);
 			
+			List<WriteDTO> list = new ArrayList<>();
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-
+				WriteDTO writeDTO = new WriteDTO();
+				
+				writeDTO.setPostNumber(rs.getInt(1));
+				writeDTO.setTitle(rs.getString(2));
+				writeDTO.setContent(rs.getString(3));
+				writeDTO.setLikes(rs.getInt(4));
+				writeDTO.setHate(rs.getInt(5));
+				writeDTO.setVisit(rs.getInt(6));
+				writeDTO.setImageLocation(rs.getString(7));
+				
+				list.add(writeDTO);
+				
+				
 			}
+			
+			return list;
 			
 			
 		}catch (SQLException e) {
@@ -116,8 +133,9 @@ public class WriteTableDAO {
 		
 		
 		
-		return writeDTO;
+		return null;
 	}
+	
 	
 	
 	

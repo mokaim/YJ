@@ -11,8 +11,9 @@
 
   		<init-param>
   			<param-name>initparam</param-name>
-  			<param-value>UTF-8</param-value>
+  			<param-value>utf-8</param-value>
   		</init-param>
+  		
   	 </filter>
 
 

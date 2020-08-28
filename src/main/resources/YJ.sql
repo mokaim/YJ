@@ -42,14 +42,10 @@ select * from WriteTable
 drop table WriteTable
 drop table UserTable
 
-select u.user_number,
-	   w.post_number,
-	   u.email as writer,
-	   
-	   w.title,
-	   w.content,
-	   w.likes,
-	   w.hate,
-	   w.visit,
-	   w.posted_date	   
-	   from UserTable u inner join WriteTable w on u.user_number = w.user_number order by w.post_number desc;
+create table ImageTable (
+	imageId int primary key identity,
+	imageLocation varchar(512),
+	post_number int,
+
+	foreign key (post_number) references WriteTable(post_number)
+)

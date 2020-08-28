@@ -21,6 +21,7 @@ public class WriteDTO {
 	private int hate;
 	private int visit;
 	private String posted_date;
+	private String imageLocation;
 	
 	
 	

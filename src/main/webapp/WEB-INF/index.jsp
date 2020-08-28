@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -127,7 +127,7 @@
             <!--============== Start side bar ============== -->
             <div class="sidebar" id="mySidebar">
                 <div class="sidebar-menu">
-                    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">¡¿</a>
+                    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">Ã—</a>
                     <div class="profile">
                         <img src="./resources/image/person.jpg" alt="">
                         <p>USER</p>
@@ -331,10 +331,10 @@
                         </div>
                         <form class="container" name="detailPageForm">
                             <label for="title"><b>Title</b></label>
-                            <textarea class="title" readonly name="dPageTitle"></textarea>
+                            <textarea class="title" readonly name="dPageTitle" id="targetTitle"></textarea>
                             <br>
                             <label for="content"><b>Content</b></label>
-                            <textarea class="content" readonly name="dPageContent"> </textarea>
+                            <textarea class="content" readonly name="dPageContent" id="targetContent"></textarea>
                             <br>
                             <label for="image"><b>Image</b></label>
                             <div class="img"></div>
@@ -358,6 +358,7 @@
         <!--===============End wrapper ================-->
 
         <script type="text/javascript" src="./resources/JS/main.js"></script>
+        
         <script>
             const uploadContainer = document.querySelector('.uploadContainer');
             const fileName = document.querySelector('.file-name');
@@ -420,42 +421,51 @@
 
 
 
-			function openContent(test){
+			function openContent(queryString){
 
 				//var myNum = "<c:out value='${totalPage}'/>";
-				var myNum = test;
+				
+				var html = [];
 				
 				mainTop.style.display = 'none';
 				table.style.display = 'none';
 				pagination.style.display = 'none';
 				detailPage.style.display = 'block';
 
-				alert('myNum : ' + myNum);
+
+				var ajaxGet = '/master/index/view?viewId=' + queryString;
+				var title;
+				var content;
+
+
+
+				
 
 				$.ajax({
 
 					type : 'get',
-					url : '/index/view',
-					data : 'from ajax',
-					success : function(result){
-						alert('¼º°ø');
-					},error : function(request,status,err){
+					url : ajaxGet,
+					success : (result) => {
 
-						alert('½ÇÆÐÇÔ..;;' + err);
+						document.getElementById('targetTitle').value = result[0].title;
+						document.getElementById('targetContent').value = result[0].content;
+						
+						for(i=0; i<result.length; i++){
+							console.log(result[i].title);
+						}
+
+						
+					},error : (request,status,err) => {
+
+						alert('ì‹¤íŒ¨í•¨..;;' + status);
 					}
 					
 
 				});
-
-
 				
 			}
 						
 			
-
-
-            
-
 
             
        </script>

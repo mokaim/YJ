@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yeongjin.action.Action;
+import com.yeongjin.action.ViewAction;
+
 /**
  * Servlet implementation class ViewController
  */
 
-
+@WebServlet("/index/view")
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,19 +32,15 @@ public class ViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		Action action = new ViewAction();
+		action.execute(request, response);
 		
 		
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
 
 }

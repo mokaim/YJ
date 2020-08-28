@@ -79,7 +79,7 @@ public class ListAction implements Action{
 			
 	
 			subPostCount = postCount - (page - 1) * 10;
-			log.info("보여줄 포스트 넘버는 " + subPostCount + "에서 부터");
+			
 			
 			list = writeTableDAO.getList(subPostCount);
 			

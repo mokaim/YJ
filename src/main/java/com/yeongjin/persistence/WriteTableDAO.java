@@ -175,6 +175,52 @@ public class WriteTableDAO {
 		return Cnt;
 	}
 	
+	
+	
+	
+	public int insertImage(WriteDTO writeDTO) {
+		
+		String query = "insert into ImageTable values(?, (select count(*) from WriteTable))";
+		
+		
+		
+		conn = JDBCUtil.getInstance().getConnection();
+		
+		try {
+			System.out.println("이미지가 참조하는 포스트 키의 값 : ");
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, writeDTO.getImageLocation());
+
+			return pstmt.executeUpdate();
+			
+
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		return -1;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public synchronized int deleteWriteTable(WriteTable writeTable) {
 		int Cnt = 0;
 		conn = JDBCUtil.getInstance().getConnection();

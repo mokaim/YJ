@@ -79,7 +79,7 @@ public class TestServlet extends HttpServlet {
 		/*
 		 * String qq = "Hello world!!"; String name = "ma!!";
 		 * 
-		 * String a = "{\"code\":\"" + name + "\" , \"msg\":\"" + qq + "\"}";
+		 String a = "{\"code\":\"" + name + "\" , \"msg\":\"" + qq + "\"}";
 		 */
 
 		response.getWriter().append(jArray.toString());	

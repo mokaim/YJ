@@ -2,14 +2,18 @@ package com.yeongjin.action;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.yeongjin.domain.WriteDTO;
-import com.yeongjin.domain.WriteTable;
+
 import com.yeongjin.message.MessageView;
+import com.yeongjin.service.WriteImageService;
 import com.yeongjin.service.WriteService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,17 +22,30 @@ import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/write")
 public class WriteAction implements Action{
+	
+	private final int size = 1024 * 1024 * 15;
+	
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		WriteService service = new WriteService();
+		WriteImageService service2 = new WriteImageService();
+		
 		MessageView message = new MessageView();
 		
+		String path = request.getServletContext().getRealPath("/image");
+		
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
+		
+		String uploadFile = multipartRequest.getFilesystemName("uploadFile");	
 		String userEmail = (String)request.getSession(true).getAttribute("id");
+		String title = multipartRequest.getParameter("title");
+		String content = multipartRequest.getParameter("content");
 		
 		
-		String title = (String)request.getAttribute("title");
 		
-		String content = (String)request.getAttribute("content");
+		
 		log.info("title : " + title);
 		log.info("content : " + content);
 		
@@ -36,9 +53,16 @@ public class WriteAction implements Action{
 		writeDTO.setTitle(title);
 		writeDTO.setContent(content);
 		writeDTO.setWriter(userEmail);
+		writeDTO.setImageLocation(uploadFile);
 		
 		
-		service.WriteInsert(writeDTO);
+		boolean isFaild = service.WriteInsert(writeDTO);
+		
+		
+		
+		if(isFaild) {
+			service2.writeImageInsert(writeDTO);
+		}
 		
 		response.sendRedirect("/master/index");
 		

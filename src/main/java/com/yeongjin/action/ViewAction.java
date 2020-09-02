@@ -1,6 +1,7 @@
 package com.yeongjin.action;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ViewAction implements Action{
 
-	
-	
+		
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -48,6 +48,7 @@ public class ViewAction implements Action{
 				response.getWriter().append("잘못된 페이지 번호");
 			}
 			
+
 			
 			list.stream().forEach(o -> {
 				
@@ -75,12 +76,9 @@ public class ViewAction implements Action{
 			response.sendRedirect("/master/index");
 		}
 		
-		
-		
-		
+
 		
 	}
-	
 	
 
 }

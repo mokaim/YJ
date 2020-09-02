@@ -23,6 +23,12 @@
       <scope>test</scope>
     </dependency>
     
+ <dependency>
+    <groupId>com.google.api-client</groupId>
+    <artifactId>google-api-client</artifactId>
+    <version>1.30.9</version>
+</dependency>
+    
     
         <!-- https://mvnrepository.com/artifact/servlets.com/cos -->
 <dependency>
@@ -66,11 +72,13 @@
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
-	<dependency>
-    	<groupId>com.microsoft.sqlserver</groupId>
-    	<artifactId>mssql-jdbc</artifactId>
-    	<version>8.2.2.jre8</version>
-	</dependency>
+<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>8.3.1.jre8-preview</version>
+</dependency>
+
 	
 	
 	<!-- https://mvnrepository.com/artifact/jstl/jstl -->

@@ -10,6 +10,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-client_id"
+     		content="1035524861088-m2l6aereidkdtqalildtk8no9mih6lug.apps.googleusercontent.com">
+     		
         <title>Team Project Board</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 
@@ -23,6 +28,17 @@
         
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         
+
+
+	<script>
+    	function onLoad() {
+        	gapi.load('auth2', function() {
+          	gapi.auth2.init();
+        	});
+      	}
+	</script>
+	
+	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
     </head>
     <body>
@@ -46,6 +62,7 @@
     					<li><a class="button" style="width:auto;" onclick="openLogin()">Log In</a></li>
                             
                             
+                            
                             <div id="id01" class="login">
                                 <form action="/master/login" method="post" class="login-content animate">
                                     <div class="imgcontainer">
@@ -58,6 +75,8 @@
                                         <label for="psw"><b>Password</b></label>
                                         <input type="password" placeholder="Enter Password" name="psw" required></input>
                                         <button class="loginbtn" type="submit">Login</button>
+                                        <button data-onsuccess="onSignIn"><i class="fab fa-google"></i> LogIn with Google</button>
+                                        <br>
                                         <label>
                                             <input type="checkbox" checked="checked" name="remember"> Remember me</input>
                                         </label>
@@ -65,6 +84,9 @@
                                     </div>
                                 </form>
                             </div>
+                            
+                         
+                         
                             
                             
                         <li><a href="#" class="button" style="width:auto;" onclick="openSignup()">Sign Up</a></li>
@@ -109,14 +131,17 @@
 
                                         <input type="submit" class="signUpBtn">
                                         <p>or</p>
-                                        <button class="signUpBtn signUpWith" type="submit"><i class="fab fa-google"></i> Sign Up with Google</button>
-                                        <button class="signUpBtn signUpWith" type="submit"><i class="fab fa-facebook-f"></i> Sign Up with Facebook</button>
+                                        
                                         <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
                                     </form>
                                 </div>
                             </div>
 
 					</c:if>
+						
+						<button type="button" onclick="signOut()">Log out</button>
+					
+
 
 
                         <li><a href="#" class="dark-mode"><i class="fas fa-moon"></i></a></li>
@@ -198,23 +223,28 @@
             <!--==================End side bar ===================-->
 
             <!--===============Start main container ================-->
+                        
             <div class="main-container" id="myMain">
+            
+            <c:if test="${user eq null}">
+            
+            	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+            
+            </c:if>
+            
+
                 <div class="main-top">
                     <div class="main-top2">
                         <button class="mainTop-btn">All</button>
                         <button class="mainTop-btn">Notice</button>
                     </div>
                     <div class="main-top2">
-                        <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Search here!:)">
-                            <button type="submit" class="searchButton">
-                            <i class="fa fa-search"></i></button>
-                        </div>
+
                         
                         <c:if test="${user != null}">
 							<button class="mainTop-btn" onclick="openWrite()">Write</button>
                             <div id="write" class="write">
-                                <form action="/master/writer" method="post" class="write-content animate">
+                                <form action="/master/writer" method="post" enctype="multipart/form-data" class="write-content animate">
                                     <div class="writeContainer">
                                         <span><a class="close" onclick="closeWrite()">x</a></span>
                                         <img src="./image/writeBG.jpg" alt="writeImg" class="writeImg" ></img>
@@ -225,7 +255,7 @@
                                         <input type="text" name="title" required placeholder="Title here"></input>
                                         <br>
                                         <label for="content"><b>Content</b></label>
-                                        <textarea type="textarea" name="content" class="content" required> </textarea>
+                                        <textarea type="textarea" name="content" class="content" required></textarea>
                                         <br>
                                         <label for="image"><b>Attach Image</b></label>
                                         <br>
@@ -320,7 +350,6 @@
                   	</c:otherwise>
                   	
                   </c:choose>
-
                 </div>
                 
 
@@ -337,7 +366,7 @@
                             <textarea class="content" readonly name="dPageContent" id="targetContent"></textarea>
                             <br>
                             <label for="image"><b>Image</b></label>
-                            <div class="img"></div>
+                            <div class="img" id="imgTarget"></div>
                             <br>
                             <button class="writeBtn" onclick="backToList()">Back</button>
                         </form>
@@ -435,12 +464,7 @@
 
 				var ajaxGet = '/master/index/view?viewId=' + queryString;
 				var title;
-				var content;
-
-
-
-				
-
+				var content;				
 				$.ajax({
 
 					type : 'get',
@@ -450,20 +474,59 @@
 						document.getElementById('targetTitle').value = result[0].title;
 						document.getElementById('targetContent').value = result[0].content;
 						
-						for(i=0; i<result.length; i++){
-							console.log(result[i].title);
+						for(i=0; i<result.length; i++){			
+							console.log(result[i].imageLocation);
+							html.push('<img src=' + '/filepath/' + result[i].imageLocation + ' style="width : 150px; height : 150px">' + '</img>');
+							
 						}
 
-						
-					},error : (request,status,err) => {
+						$('#imgTarget').html(html.join(''));
 
-						alert('실패함..;;' + status);
+						
+					},
+
+					error : (status) => {
+
+						alert('실패함..;;');
 					}
 					
-
 				});
 				
 			}
+
+
+
+			function onSignIn(googleUser) {
+		         var profile = googleUser.getBasicProfile();
+		         console.log('ID: ' + profile.getId());
+		         console.log('Name: ' + profile.getName());
+		         console.log('Image URL: ' + profile.getImageUrl());
+		         console.log('Email: ' + profile.getEmail());
+		         console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+
+		         //do not post all above info to the server because that is not secure.
+		         //just send the id_token
+
+		         var redirectUrl = '/master/google-login';
+
+		         //using jquery to post data dynamically
+		         var form = $('<form action="' + redirectUrl + '" method="post">' +
+		                          '<input type="text" name="id_token" value="' +
+		                           googleUser.getAuthResponse().id_token + '" />' +
+		                                                                '</form>');
+		         $('body').append(form);
+		         form.submit();
+		      }
+
+
+			  function signOut() {
+				    var auth2 = gapi.auth2.getAuthInstance();
+				    auth2.signOut().then(function () {
+				      console.log('User signed out.');
+		      		});
+
+		      		location.href="/master/logout";
+			  }
 						
 			
 

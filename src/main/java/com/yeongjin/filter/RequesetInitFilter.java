@@ -61,6 +61,9 @@ public class RequesetInitFilter implements Filter{
 			request.getRequestDispatcher("/signup").forward(request, response);
 		}else if(path.equals("/login")) {
 			request.getRequestDispatcher("/login").forward(request, response);
+		}else if(path.equals("/google-login")) {
+			log.info("구글 로그인 됨");
+			request.getRequestDispatcher("/google-login").forward(request, response);
 		}
 		
 		

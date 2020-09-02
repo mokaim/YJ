@@ -1,5 +1,7 @@
 package com.yeongjin.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.yeongjin.domain.WriteDTO;
 import com.yeongjin.domain.WriteTable;
 import com.yeongjin.persistence.JDBCUtil;
@@ -17,8 +19,10 @@ public class WriteService {
 	public boolean WriteInsert(WriteDTO writeDTO) {		
 		WriteTableDAO writeDAO = WriteTableDAO.getinstance();
 		
+		
 		int userNumber = writeDAO.getUserNumber(writeDTO.getWriter());
 		int postNumber = writeDAO.getCountPost();
+		
 		String date = writeDAO.getDate();
 		
 		writeDTO.setUserNumber(userNumber);
@@ -27,6 +31,8 @@ public class WriteService {
 		writeDTO.setHate(0);
 		writeDTO.setVisit(0);	
 		writeDTO.setPosted_date(date);
+
+		
 		
 				
 		
@@ -36,12 +42,17 @@ public class WriteService {
 		int Cnt = writeDAO.insertWriteTable(writeDTO);
 		
 		if(Cnt > 0) {
+
 			JDBCUtil.getInstance().commit(writeDAO.conn);
 			isInsert = true;
+			
+
 		}else {
+			
 			JDBCUtil.getInstance().commit(writeDAO.conn);
 		}
-		JDBCUtil.getInstance().ConnClose(writeDAO.conn);
+		
+		
 		return isInsert;
 	}
 }

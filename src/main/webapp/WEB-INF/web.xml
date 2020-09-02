@@ -31,6 +31,12 @@
 		<servlet-name>list</servlet-name>
 		<servlet-class>com.yeongjin.controller.MainController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>LogoutController</servlet-name>
+		<display-name>LogoutController</display-name>
+		<description></description>
+		<servlet-class>com.yeongjin.controller.LogoutController</servlet-class>
+	</servlet>
 
 
 
@@ -38,6 +44,11 @@
         <servlet-name>list</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>LogoutController</servlet-name>
+    	<url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+
 
     
 
